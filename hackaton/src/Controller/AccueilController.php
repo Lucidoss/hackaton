@@ -47,4 +47,12 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
+
+    #[Route('/inscriptionhackathon', name: 'app_inscriptionhackathon')]
+    public function inscriptionhackathon(): Response
+    {
+        return $this->render('accueil/inscriptionhackathon.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+    }
 }
