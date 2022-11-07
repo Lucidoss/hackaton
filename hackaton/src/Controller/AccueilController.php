@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\PdoHackathons;
 
 class AccueilController extends AbstractController
 {
@@ -33,8 +34,21 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/inscription', name: 'app_inscription')]
-    public function inscription(): Response
+    public function inscription(PdoHackathons $pdoHackathons): Response
     {
+        $nom = '';
+        $prenom = '';
+        $dateNaissance = '';
+        $ville = '';
+        $rue = '';
+        $cp = '';
+        $email = '';
+        $login = '';
+        $mdp = '';
+        $sel = '';
+
+        $pdoHackathons->inscrire($nom, $prenom, $dateNaissance, $ville, $rue, $cp, $email, $login, $mdp, $sel);
+
         return $this->render('accueil/inscription.html.twig', [
             'controller_name' => 'AccueilController',
         ]);
