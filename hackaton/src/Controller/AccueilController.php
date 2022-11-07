@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\PdoHackathons;
 
 class AccueilController extends AbstractController
 {
@@ -25,8 +26,19 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/connexion', name: 'app_connexion')]
-    public function connexion(): Response
+    public function connexion(PdoHackathons $pdoHackathons): Response
     {
+        $login = 'sbeauchene';
+        $mdp = 'mdp';
+
+        $user = $pdoHackathons->connecter($login, $mdp);
+
+        if($user > 1) {
+            dump('OK');
+        } else {
+            dump('PAS OK');
+        }
+
         return $this->render('accueil/connexion.html.twig', [
             'controller_name' => 'AccueilController',
         ]);
