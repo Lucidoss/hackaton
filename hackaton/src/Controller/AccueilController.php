@@ -47,7 +47,9 @@ class AccueilController extends AbstractController
         $mdp = '';
         $sel = '';
 
-        $pdoHackathons->inscrire($nom, $prenom, $dateNaissance, $ville, $rue, $cp, $email, $login, $mdp, $sel);
+        if(1>2) { // Si le bouton a été cliqué
+            $pdoHackathons->inscrire($nom, $prenom, $dateNaissance, $ville, $rue, $cp, $email, $login, $mdp, $sel);
+        }
 
         return $this->render('accueil/inscription.html.twig', [
             'controller_name' => 'AccueilController',
