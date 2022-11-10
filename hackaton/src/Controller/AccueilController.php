@@ -17,10 +17,8 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/hackathon', name: 'app_hackathon')]
-    public function hackathon(PdoHackathons $pdoHackathons): Response
+    public function hackathon(): Response
     {
-        $nombreHackhathons = $pdoHackathons->getNbHackathons();
-        dump($nombreHackhathons);
         return $this->render('accueil/hackathon.html.twig', [
             'controller_name' => 'AccueilController',
         ]);
