@@ -24,10 +24,10 @@ services:
             alias: service_pdo 
 
     service_pdo: 
-        class: App\Service\PdoFouDeSerie 
+        class: App\Service\PdoHackathons 
         arguments: 
             $serveur: 'mysql:host=127.0.0.1:3306' 
-            $bdd: 'dbname=hackathons' 
+            $bdd: 'dbname=hackatons' 
             $user: 'root' 
             $mdp: ''
     # add more service definitions when explicit configuration is needed
