@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Service\PdoHackathons;
 class AccueilController extends AbstractController
 {
     #[Route('/', name: 'app_accueil')]
@@ -17,8 +17,10 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/hackathon', name: 'app_hackathon')]
-    public function hackathon(): Response
+    public function hackathon(PdoHackathons $pdoHackathons): Response
     {
+        $nombreHackhathons = $pdoHackathons->getNbHackathons();
+        dump($nombreHackhathons);
         return $this->render('accueil/hackathon.html.twig', [
             'controller_name' => 'AccueilController',
         ]);
