@@ -6,10 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\PdoHackathons;
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 class AccueilController extends AbstractController
 {
     #[Route('/', name: 'app_accueil')]
@@ -37,13 +34,15 @@ class AccueilController extends AbstractController
         $user = $pdoHackathons->connecter($login, $mdp);
 
         if($user > 1) {
+            $connexion = 'Connexion réussie';
             dump('OK');
         } else {
+            $connexion = 'Connexion échoué';
             dump('PAS OK');
         }
 
         return $this->render('accueil/connexion.html.twig', [
-            'controller_name' => 'AccueilController',
+            'connexion' => $connexion,
         ]);
     }
 
