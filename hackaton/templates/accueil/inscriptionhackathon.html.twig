@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Hackathons : Inscription</title>
+		<title>Inscription</title>
 		<link rel="stylesheet" type="text/css" href="{{asset('styleconnexion.css')}}">
 	</head>
 
@@ -48,63 +48,61 @@
 					<div class="formbg-outer">
 						<div class="formbg">
 							<div class="formbg-inner padding-horizontal--48">
-								<span class="padding-bottom--15">S'inscrire à un hackathon
+								<span class="padding-bottom--15">Creer un compte
 								</span>
 								<form id="stripe-login">
 									<div class="field padding-bottom--24">
-										<label for="listehackathons">Choisir le hackathon</label>
-                                        <div class="select">
-										<select id="listehackathons" name="listehackathons" form="listehackathons">
-											<option value="volvo">Volvo</option>
-											<option value="saab">Saab</option>
-											<option value="opel">Opel</option>
-											<option value="audi">Audi</option>
-										</select>
-                                        </div>
+										<label for="nom">Nom</label>
+										<select style="width:100%;outline-color: rgb(84 105 212 / 0.5);border: unset;min-height: 44px;font-size: 16px;padding: 8px 16px;border-radius: 4px;box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								</div>
+								<div class="field padding-bottom--24">
+									<label for="prenom">Prenom</label>
+									<input type="prenom" name="prenom">
+								</div>
+								<div class="field padding-bottom--24">
+									<label for="naissance">Date de Naissance</label>
+									<input type="date" name="naissance">
+								</div>
+								<div class="field padding-bottom--24">
+									<label for="ville">Ville</label>
+									<input type="ville" name="ville">
+								</div>
+								<div class="field padding-bottom--24">
+									<label for="rue">Rue</label>
+									<input type="rue" name="rue">
+								</div>
+								<div class="field padding-bottom--24">
+									<label for="cp">Code Postal</label>
+									<input type="cp" name="cp">
+								</div>
+								<div class="field padding-bottom--24">
+									<label for="email">Email</label>
+									<input type="email" name="email">
+								</div>
+								<div class="field padding-bottom--24">
+									<label for="login">Login</label>
+									<input type="login" name="login">
+								</div>
+								<div class="field padding-bottom--24">
+									<div class="grid--50-50">
+										<label for="password">Mot de passe</label>
 									</div>
-									<div class="field padding-bottom--24">
-										<label for="prenom">Prenom</label>
-										<input type="prenom" name="prenom">
-									</div>
-									<div class="field padding-bottom--24">
-										<label for="naissance">Date de Naissance</label>
-										<input type="date" name="naissance">
-									</div>
-									<div class="field padding-bottom--24">
-										<label for="ville">Ville</label>
-										<input type="ville" name="ville">
-									</div>
-									<div class="field padding-bottom--24">
-										<label for="rue">Rue</label>
-										<input type="rue" name="rue">
-									</div>
-									<div class="field padding-bottom--24">
-										<label for="cp">Code Postal</label>
-										<input type="cp" name="cp">
-									</div>
-									<div class="field padding-bottom--24">
-										<label for="email">Email</label>
-										<input type="email" name="email">
-									</div>
-									<div class="field padding-bottom--24">
-										<label for="login">Login</label>
-										<input type="login" name="login">
-									</div>
-									<div class="field padding-bottom--24">
-										<div class="grid--50-50">
-											<label for="password">Mot de passe</label>
-										</div>
-										<input type="password" name="password">
-									</div>
-									<div class="field padding-bottom--24">
-										<input type="submit" name="submit" value="S'inscrire">
-									</div>
-								</form>
-							</div>
+									<input type="password" name="password">
+								</div>
+								<div class="field padding-bottom--24">
+									<input type="submit" name="submit" value="S'inscrire">
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-		</body>
+		</div>
 	</body>
 </html></div></body></html>
