@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\PdoHackathons;
+use App\Entity\Hackathon;
 
 class AccueilController extends AbstractController
 {
@@ -34,28 +35,19 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/inscription', name: 'app_inscription')]
-    public function inscription(PdoHackathons $pdoHackathons): Response
+    public function inscription(): Response
     {
-        $nom = '';
-        $prenom = '';
-        $dateNaissance = '2002-11-25';
-        $ville = '';
-        $rue = '';
-        $cp = '';
-        $email = '';
-        $login = '';
-        $mdp = '';
-
-        if(1>2) { // Si le bouton a été cliqué
-            if($nom != '') {
-                dump('Veuillez saisir un nom');
-            } else if ($prenom != '') {
-                dump('Veuillez saisir un prenom');
-            }
-            $pdoHackathons->inscrire($nom, $prenom, $dateNaissance, $ville, $rue, $cp, $email, $login, $mdp);
-        }
+        
 
         return $this->render('accueil/inscription.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+    }
+
+    #[Route('/deconnexion', name: 'app_deconnexion')]
+    public function deconnexion(): Response
+    {
+        return $this->render('accueil/deconnexion.html.twig', [
             'controller_name' => 'AccueilController',
         ]);
     }
@@ -75,4 +67,5 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
+
 }
