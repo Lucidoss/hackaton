@@ -66,12 +66,19 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/inscriptionhackathon', name: 'app_inscriptionhackathon')]
-    public function inscriptionhackathon(): Response
+    #[Route('/inscriptionhackathon/{id}', name: 'app_inscriptionhackathon')]
+    public function inscriptionhackathon(ManagerRegistry $doctrine,$id): Response
     {
-        return $this->render('accueil/inscriptionhackathon.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
+        $repository = $doctrine->getRepository(Hackathon::class);
+        $leHackathon = $repository->find($id);
+        return $this->render('accueil/inscriptionhackathon.html.twig', ['leHackathon' => $leHackathon]);
     }
 
+    #[Route('/detailhackathon/{id}', name: 'app_detailhackathon')]
+    public function detailhackathon(ManagerRegistry $doctrine,$id): Response
+    {
+        $repository = $doctrine->getRepository(Hackathon::class);
+        $leHackathon = $repository->find($id);
+        return $this->render('accueil/detailhackathon.html.twig', ['leHackathon' => $leHackathon]);
+    }
 }

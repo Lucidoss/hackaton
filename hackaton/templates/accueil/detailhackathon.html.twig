@@ -33,46 +33,24 @@
 	</div>
 <div style="z-index: -1;position: absolute;">
 
-<h1>Il existe {{ lesHackathons|length() }} Hackathons.</h1>
-<input id="searchbar" onkeyup="search_hackathons()" type="text"
-        name="search" placeholder="Rechercher un hackathons">
-
-
-
-   {% for hackathon in lesHackathons %}
    <div class="card" style="border: none; width:19rem">
    <ol style="list-style: none" class="ok">
      <div class="col-12">
 	 			<div class="hackathon">
-				<li><a href="{{path('app_detailhackathon', {'id' : hackathon.ID}) }}"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 18rem"/></a></li>
-				<li>{{ hackathon.THEME }}</li>
-				<li>Ville: {{ hackathon.VILLE }}</li>
-				<li>Rue: {{ hackathon.RUE }}</li>
-				<li class="date">Du: {{ hackathon.DATEDEBUT|date('d/m/Y') }}</li>
-				<li>Au: {{ hackathon.DATEFIN|date('d/m/Y') }}</li>
-				<li>Places: {{ hackathon.NBPLACES }}</li>
-				<a href="{{path('app_inscriptionhackathon', {'id' : hackathon.ID}) }}"><button>S'enregistrer à ce Hackathon</button></a>
+				<li><img src={{ leHackathon.IMAGE }} alt="Aucune image" style="width: 18rem"/></a></li>
+				<li>{{ leHackathon.THEME }}</li>
+                <li>{{ leHackathon.DESCRIPTION }}</li>
+				<li>Ville: {{ leHackathon.VILLE }}</li>
+				<li>Rue: {{ leHackathon.RUE }}</li>
+				<li class="date">Du: {{ leHackathon.DATEDEBUT|date('d/m/Y') }}</li>
+				<li>Au: {{ leHackathon.DATEFIN|date('d/m/Y') }}</li>
+                <li>De: {{ leHackathon.HEUREDEBUT|date('H:i:s') }}</li>
+                <li>A: {{ leHackathon.HEUREFIN|date('H:i:s') }}</li>
+				<li>Places: {{ leHackathon.NBPLACES }}</li>
+				<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}"><button>S'enregistrer à ce Hackathon</button></a>
 				</div>
 	</div>
 	</ol>
     </br>
-    {% endfor %} 
-
-<script>
-function search_hackathons() {
-    let input = document.getElementById('searchbar').value
-    input=input.toLowerCase();
-    let x = document.getElementsByClassName('hackathon');
-      
-    for (i = 0; i < x.length; i++) { 
-        if (!x[i].innerHTML.toLowerCase().includes(input)) {
-            x[i].style.display="none";
-        }
-        else {
-            x[i].style.display="list-item";                 
-        }
-    }
-}
-</script>
 
 </div>{% endblock %}
