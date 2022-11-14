@@ -24,7 +24,10 @@ class AccueilController extends AbstractController
     public function hackathon(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(Hackathon::class);
-        $hackathons = $repository->findAll();
+        $hackathons = $repository->findBy(
+            array(), // ou [] à la place des () sans array devant
+            array('DATEDEBUT' => 'ASC')
+          );
 
         return $this->render('accueil/hackathon.html.twig', [
             'lesHackathons' => $hackathons 
