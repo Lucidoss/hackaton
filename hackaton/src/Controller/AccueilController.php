@@ -6,7 +6,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Hackathon;
+use App\Entity\Participant;
+use Symfony\Component\BrowserKit\Request;
 
 class AccueilController extends AbstractController
 {
@@ -34,14 +35,45 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/inscription', name: 'app_inscription')]
-    public function inscription(): Response
+    #[Route('/inscription/{uc}', name: 'app_inscription')]
+    public function inscription(ManagerRegistry $doctrine, $uc): Response
     {
-        
+        if($uc == "POST") {
+            $participant = new Participant();
+            $nom = $_POST['nom'];
 
-        return $this->render('accueil/inscription.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
+            $participant->setNOM($nom);
+            $prenom = $_POST['prenom'];
+
+            $participant->setPRENOM($prenom);
+            $dateNaissance = $_POST['dateNaissance'];
+
+            $participant->setDATENAISSANCE(new \DateTime($dateNaissance));
+            $ville = $_POST['ville'];
+
+            $participant->setVILLE($ville);
+            $rue = $_POST['rue'];
+
+            $participant->setRUE($rue);
+            $cp = $_POST['cp'];
+
+            $participant->setCP($cp);
+            $email = $_POST['email'];
+
+            $participant->setEMAIL($email);
+            $mdp = $_POST['mdp'];
+            
+            $participant->setMDP($mdp);
+            $participant->setLOGIN(strtolower($prenom[0] . $nom));
+
+            $entityManager=$doctrine->getManager();
+            $entityManager->persist($participant);
+            $entityManager->flush();
+
+            return $this->render('accueil/inscription.html.twig');
+        } else {
+            return $this->render('accueil/inscription.html.twig');
+        }
     }
 
     #[Route('/deconnexion', name: 'app_deconnexion')]

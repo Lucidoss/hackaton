@@ -7,12 +7,11 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
-#[ORM\Table(name:'hackathon')]
+#[ORM\Table(name:'participant')]
 class Participant
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
     #[ORM\Column(name:'IDPARTICIPANT')]
     private ?int $id = null;
 
@@ -155,4 +154,14 @@ class Participant
 
         return $this;
     }
+
+    // public function addParticipant(Participant $participants): self
+    // {
+    //     if (!$this->participants->contains($participants)) {
+    //         $this->participants->add($participants);
+    //         $participants->addParticipant($this);
+    //     }
+
+    //     return $this;
+    // }
 }

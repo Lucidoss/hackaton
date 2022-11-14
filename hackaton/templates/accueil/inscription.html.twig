@@ -51,40 +51,40 @@
 							<div class="formbg-inner padding-horizontal--48">
 								<span class="padding-bottom--15">Creer un compte
 								</span>
-								<form id="stripe-login">
+								<form id="stripe-login" action="{{ path('app_inscription', {uc: 'POST' }) }}" method="POST">
                                     <div class="field padding-bottom--24">
 										<label for="nom">Nom</label>
-										<input type="nom" name="nom">
+										<input type="text" name="nom" id="nom" minlength="1" maxlength="32" required>
 									</div>
                                     <div class="field padding-bottom--24">
 										<label for="prenom">Prenom</label>
-										<input type="prenom" name="prenom">
+										<input type="text" name="prenom" minlength="1" maxlength="32" required>
 									</div>
                                     <div class="field padding-bottom--24">
 										<label for="naissance">Date de Naissance</label>
-										<input type="date" name="naissance">
+										<input type="date" name="dateNaissance" required>
 									</div>
                                     <div class="field padding-bottom--24">
 										<label for="ville">Ville</label>
-										<input type="ville" name="ville">
+										<input type="text" name="ville" minlength="1" maxlength="64" required>
 									</div>
                                     <div class="field padding-bottom--24">
 										<label for="rue">Rue</label>
-										<input type="rue" name="rue">
+										<input type="text" name="rue" minlength="1" maxlength="128" required>
 									</div>
                                     <div class="field padding-bottom--24">
 										<label for="cp">Code Postal</label>
-										<input type="cp" name="cp">
+										<input type="text" name="cp" minlength="5" maxlength="5" required>
 									</div>
 									<div class="field padding-bottom--24">
 										<label for="email">Email</label>
-										<input type="email" name="email">
+										<input type="email" name="email" minlength="1" maxlength="32" required>
 									</div>
 									<div class="field padding-bottom--24">
 										<div class="grid--50-50">
 											<label for="password">Mot de passe</label>
 										</div>
-										<input type="password" name="password">
+										<input type="password" name="mdp" minlength="8" required>
 									</div>
 									<div class="field padding-bottom--24">
 										<input type="submit" name="submit" value="S'inscrire">
