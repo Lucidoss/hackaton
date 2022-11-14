@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\PdoHackathons;
+use App\Entity\Participant;
+use Symfony\Component\BrowserKit\Request;
 
 class AccueilController extends AbstractController
 {
@@ -25,31 +27,72 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/connexion', name: 'app_connexion')]
-    public function connexion(PdoHackathons $pdoHackathons): Response
+    #[Route('/connexion/{uc}', name: 'app_connexion')]
+    public function connexion(ManagerRegistry $doctrine, $uc): Response
     {
-        $login = 'sbeauchene';
-        $mdp = 'mdp';
-
-        $user = $pdoHackathons->connecter($login, $mdp);
-
-        if($user > 1) {
-            $connexion = 'Connexion réussie';
-            dump('OK');
-        } else {
-            $connexion = 'Connexion échoué';
-            dump('PAS OK');
+        if($uc == "POST") {
+            $login = $_POST['login'];
+            $mdp = $_POST['mdp'];
+            $repository = $doctrine->getRepository(Participant::class);
+            $user = $repository->findOneBy([ 
+            'LOGIN' => $login, 
+            'MDP' => $mdp, 
+            ]);
+           
+            if($user != null) {
+                $connexion = 'Connexion réussie';
+                dump($connexion);
+            } else {
+                $connexion = 'Connexion échoué';
+                dump($connexion);
+            }
         }
 
-        return $this->render('accueil/connexion.html.twig', [
-            'connexion' => $connexion,
-        ]);
+        return $this->render('accueil/connexion.html.twig');
     }
 
-    #[Route('/inscription', name: 'app_inscription')]
-    public function inscription(): Response
+    #[Route('/inscription/{uc}', name: 'app_inscription')]
+    public function inscription(ManagerRegistry $doctrine, $uc): Response
     {
-        return $this->render('accueil/inscription.html.twig', [
+        if($uc == "POST") {
+            $participant = new Participant();
+            $nom = $_POST['nom'];
+
+            $participant->setNOM($nom);
+            $prenom = $_POST['prenom'];
+
+            $participant->setPRENOM($prenom);
+            $dateNaissance = $_POST['dateNaissance'];
+
+            $participant->setDATENAISSANCE(new \DateTime($dateNaissance));
+            $ville = $_POST['ville'];
+
+            $participant->setVILLE($ville);
+            $rue = $_POST['rue'];
+
+            $participant->setRUE($rue);
+            $cp = $_POST['cp'];
+
+            $participant->setCP($cp);
+            $email = $_POST['email'];
+
+            $participant->setEMAIL($email);
+            $mdp = $_POST['mdp'];
+            
+            $participant->setMDP($mdp);
+            $participant->setLOGIN(strtolower($prenom[0] . $nom));
+
+            $entityManager=$doctrine->getManager();
+            $entityManager->persist($participant);
+            $entityManager->flush();
+        }
+            return $this->render('accueil/inscription.html.twig');
+    }
+
+    #[Route('/deconnexion', name: 'app_deconnexion')]
+    public function deconnexion(): Response
+    {
+        return $this->render('accueil/deconnexion.html.twig', [
             'controller_name' => 'AccueilController',
         ]);
     }
@@ -69,4 +112,5 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
+
 }

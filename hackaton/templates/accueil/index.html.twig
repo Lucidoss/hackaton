@@ -8,7 +8,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="{{asset('images/logo.png')}}">
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
 	<input type="checkbox" id="active">
 	<label for="active" class="menu-btn">
 		<span></span>
@@ -19,6 +18,10 @@
 			<li><a href="/">Accueil</a></li>
 			<li><a href="/presentation">Presentation</a></li>
 			<li><a href="/hackathon">Hackathons</a></li>
+			<div class="alignement" style="display: table;">
+			<li style="padding-left:200px"><a href="/deconnexion"><img src="{{asset('images/deconnexion.png')}}" style="width:50px"></a></li>
+			<li><a href="/connexion"><img src="{{asset('images/connexion.png')}}" style="width:50px"></a></li>
+			</div>
 		</ul>
 	</div>
 	<div class="content">
@@ -26,7 +29,7 @@
 			Bienvenue sur Hackat'Agence</div>
 	</br>
 	<center>
-		<a href="/inscription" style="text-decoration: none">
+		<a href="/inscription/inscrire" style="text-decoration: none">
 			<div class="btn from-center">
 				<p>
 					S'inscrire
@@ -35,7 +38,7 @@
 		</a>
 	</center>
 </br>
-<a href="/connexion">
+<a href="/connexion/connecter">
 	<button class="button-81" role="button">
 		<p style="font-size : 20px">
 			Déjà membre ? Connecter vous ici !

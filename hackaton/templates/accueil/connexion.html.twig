@@ -51,16 +51,16 @@
 							<div class="formbg-inner padding-horizontal--48">
 								<span class="padding-bottom--15">Connectez-vous à votre compte
 								</span>
-								<form id="stripe-login">
+								<form id="stripe-login" action="{{ path('app_connexion', {uc: 'POST' }) }}" method="POST">
 									<div class="field padding-bottom--24">
 										<label for="login">Login</label>
-										<input type="login" name="login">
+										<input type="text" name="login" required>
 									</div>
 									<div class="field padding-bottom--24">
 										<div class="grid--50-50">
 											<label for="password">Mot de passe</label>
 										</div>
-										<input type="password" name="password">
+										<input type="password" name="mdp" required>
 									</div>
 									<div class="field padding-bottom--24">
 										<input type="submit" name="submit" value="Se connecter">
@@ -70,7 +70,7 @@
 						</div>
 						<div class="footer-link padding-top--24">
 							<span>Pas encore membre ?
-								<a href="/inscription">S'inscrire</a>
+								<a href="/inscription/inscrire">S'inscrire</a>
 							</span>
 						</div>
 					</div>
