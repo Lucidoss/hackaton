@@ -36,14 +36,14 @@
 
 
    {% for hackathon in lesHackathons %}
-   <ol style="list-style: none">
+   <ol style="list-style: none" class="ok">
      <div class="col-12">
 	 			<div class="hackathon">
 				<li><a href="/hackathon/"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 18rem"/></a></li>
 				<li>{{ hackathon.THEME }}</li>
 				<li>Ville: {{ hackathon.VILLE }}</li>
 				<li>Rue: {{ hackathon.RUE }}</li>
-				<li>Du: {{ hackathon.DATEDEBUT|date('d/m/Y') }}</li>
+				<li class="date">Du: {{ hackathon.DATEDEBUT|date('d/m/Y') }}</li>
 				<li>Au: {{ hackathon.DATEFIN|date('d/m/Y') }}</li>
 				<li>Places: {{ hackathon.NBPLACES }}</li>
 				</div>
@@ -67,7 +67,6 @@ function search_hackathons() {
         }
     }
 }
-
 </script>
 
 </div>{% endblock %}
