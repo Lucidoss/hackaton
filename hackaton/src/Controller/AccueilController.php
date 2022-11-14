@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Service\PdoHackathons;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Hackathon;
 
 
 class AccueilController extends AbstractController
@@ -19,12 +21,16 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/hackathon', name: 'app_hackathon')]
-    public function hackathon(PdoHackathons $PdoHackathons): Response
+    public function hackathon(ManagerRegistry $doctrine): Response
     {
-        $lesHackathons = $PdoHackathons->getHackathons();
-        dump($lesHackathons);
+        $repository = $doctrine->getRepository(Hackathon::class);
+        $hackathons = $repository->findBy(
+            array(), // ou [] à la place des () sans array devant
+            array('DATEDEBUT' => 'ASC')
+          );
+
         return $this->render('accueil/hackathon.html.twig', [
-            'lesHackathons' => $lesHackathons
+            'lesHackathons' => $hackathons 
         ]);
     }
 
