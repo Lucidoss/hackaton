@@ -6,12 +6,8 @@ use App\Service\PdoHackathons;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-<<<<<<< HEAD
 
 
-=======
-use App\Service\PdoHackathons;
->>>>>>> master
 class AccueilController extends AbstractController
 {
     #[Route('/', name: 'app_accueil')]

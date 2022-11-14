@@ -12,7 +12,6 @@ class PdoHackathons
         PdoHackathons::$monPdo = new PDO($serveur . ';' . $bdd, $user, $mdp);
         PdoHackathons::$monPdo->query("SET CHARACTER SET utf8");
     }
-<<<<<<< HEAD
 
     public function getHackathons() {
         $req = "select * from hackathon";
@@ -31,6 +30,4 @@ class PdoHackathons
 		return $lesLignes;
     }
 
-=======
->>>>>>> master
 }
