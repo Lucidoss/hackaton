@@ -22,6 +22,8 @@ class AccueilController extends AbstractController
     public function hackathon(PdoHackathons $PdoHackathons): Response
     {
         $lesHackathons = $PdoHackathons->getHackathons();
+        $Tri = 
+        $lesHackathonsTriés = $PdoHackathons->getHackathonsTri($Tri);
         dump($lesHackathons);
         return $this->render('accueil/hackathon.html.twig', [
             'lesHackathons' => $lesHackathons
@@ -44,6 +46,14 @@ class AccueilController extends AbstractController
         ]);
     }
 
+    #[Route('/deconnexion', name: 'app_deconnexion')]
+    public function deconnexion(): Response
+    {
+        return $this->render('accueil/deconnexion.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+    }
+
     #[Route('/presentation', name: 'app_presentation')]
     public function presentation(): Response
     {
@@ -59,4 +69,5 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
+
 }

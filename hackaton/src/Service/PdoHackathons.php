@@ -31,4 +31,3 @@ class PdoHackathons
     // }
 
 }
-// FAIRE LE TRUC SUR SERVICE.YAML
