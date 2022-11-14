@@ -20,13 +20,13 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Service\PdoFouDeSerie: 
+    App\Service\PdoHackathons: 
             alias: service_pdo 
 
     service_pdo: 
-        class: App\Service\PdoHackathons 
+        class: App\Service\PdoHackathons
         arguments: 
-            $serveur: 'mysql:host=127.0.0.1:3306' 
+            $serveur: 'mysql:host=127.0.0.1:3307' 
             $bdd: 'dbname=hackatons' 
             $user: 'root' 
             $mdp: ''

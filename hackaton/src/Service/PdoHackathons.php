@@ -13,11 +13,22 @@ class PdoHackathons
         PdoHackathons::$monPdo->query("SET CHARACTER SET utf8");
     }
 
-    public function getNbHackathons() {
-        $req = PdoHackathons::$monPdo->prepare('SELECT COUNT(idHackathon) as nombre FROM hackathon');
-		$req->execute();
-		$leNombre = $req->fetch();
-		return $leNombre;
+    public function getHackathons() {
+        $req = "select * from hackathon";
+        $res = PdoHackathons::$monPdo->prepare($req);
+        $res->execute();
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
     }
+
+    public function getHackathonsTri($Tri) {
+        $req = "select * from hackathon order by :tri";
+        $res->bindParam(':tri', $Tri, PDO::PARAM_STR);
+        $res = PdoHackathons::$monPdo->prepare($req);
+        $res->execute();
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+    }
+
 }
 // FAIRE LE TRUC SUR SERVICE.YAML
