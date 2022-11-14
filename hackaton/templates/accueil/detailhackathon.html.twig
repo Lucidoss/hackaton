@@ -42,16 +42,16 @@
    <ol style="list-style: none" class="ok">
      <div class="col-12">
 	 			<div class="hackathon" style="padding: 20px;">
-				<li><img src={{ leHackathon.IMAGE }} alt="Aucune image" style="width: 100%"/></a></li>
-				<li>{{ leHackathon.THEME }}</li>
-                <li>{{ leHackathon.DESCRIPTION }}</li>
-				<li>Ville: {{ leHackathon.VILLE }}</li>
-				<li>Rue: {{ leHackathon.RUE }}</li>
-				<li class="date">Du: {{ leHackathon.DATEDEBUT|date('d/m/Y') }}</li>
-				<li>Au: {{ leHackathon.DATEFIN|date('d/m/Y') }}</li>
-                <li>De: {{ leHackathon.HEUREDEBUT|date('H:i:s') }}</li>
-                <li>A: {{ leHackathon.HEUREFIN|date('H:i:s') }}</li>
-				<li>Places: {{ leHackathon.NBPLACES }}</li>
+				<li><img src={{ leHackathon.IMAGE }} alt="Aucune image" style="width: 100%"/></a></li></br>
+				<li>Thème: {{ leHackathon.THEME }}</li></br>
+                <li>Description: {{ leHackathon.DESCRIPTION }}</li></br>
+				<li>Ville: {{ leHackathon.VILLE }}</li></br>
+				<li>Rue: {{ leHackathon.RUE }}</li></br>
+				<li class="date">Du: {{ leHackathon.DATEDEBUT|date('d/m/Y') }}</li></br>
+				<li>Au: {{ leHackathon.DATEFIN|date('d/m/Y') }}</li></br>
+                <li>De: {{ leHackathon.HEUREDEBUT|date('H:i:s') }}</li></br>
+                <li>A: {{ leHackathon.HEUREFIN|date('H:i:s') }}</li></br>
+				<li>Places: {{ leHackathon.NBPLACES }}</li></br>
 				<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none"><button style="font-size: 16px;
     line-height: 28px;
     padding: 8px 16px;

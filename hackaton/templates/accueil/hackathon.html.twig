@@ -58,13 +58,13 @@
    <ol style="list-style: none" class="ok">
      <div class="col-12">
 	 			<div class="hackathon" style="padding: 20px;">
-				<li><a href="{{path('app_detailhackathon', {'id' : hackathon.ID}) }}"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 100%"/></a></li>
-				<li>{{ hackathon.THEME }}</li>
-				<li>Ville: {{ hackathon.VILLE }}</li>
-				<li>Rue: {{ hackathon.RUE }}</li>
-				<li class="date">Du: {{ hackathon.DATEDEBUT|date('d/m/Y') }}</li>
-				<li>Au: {{ hackathon.DATEFIN|date('d/m/Y') }}</li>
-				<li>Places: {{ hackathon.NBPLACES }}</li>
+				<li><a href="{{path('app_detailhackathon', {'id' : hackathon.ID}) }}"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 100%"/></a></li></br>
+				<li>Thème: {{ hackathon.THEME }}</li></br>
+				<li>Ville: {{ hackathon.VILLE }}</li></br>
+				<li>Rue: {{ hackathon.RUE }}</li></br>
+				<li class="date">Du: {{ hackathon.DATEDEBUT|date('d/m/Y') }}</li></br>
+				<li>Au: {{ hackathon.DATEFIN|date('d/m/Y') }}</li></br>
+				<li>Places: {{ hackathon.NBPLACES }}</li></br>
 				<a href="{{path('app_inscriptionhackathon', {'id' : hackathon.ID}) }}" style="decoration:none"><button style="font-size: 16px;
     line-height: 28px;
     padding: 8px 16px;
