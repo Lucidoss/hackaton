@@ -22,8 +22,6 @@ class AccueilController extends AbstractController
     public function hackathon(PdoHackathons $PdoHackathons): Response
     {
         $lesHackathons = $PdoHackathons->getHackathons();
-        $Tri = 
-        $lesHackathons = $PdoHackathons->getHackathonsTri($Tri);
         dump($lesHackathons);
         return $this->render('accueil/hackathon.html.twig', [
             'lesHackathons' => $lesHackathons
