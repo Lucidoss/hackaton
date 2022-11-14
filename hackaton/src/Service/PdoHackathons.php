@@ -14,7 +14,7 @@ class PdoHackathons
     }
     
     public function inscrire($nom, $prenom, $dateNaissance, $ville, $rue, $cp, $email, $login, $mdp) {
-        $req = PdoHackathons::$monPdo->prepare("INSERT INTO participant(nom, prenom, dateNaissance, ville, rue, cp, email, login, mdp) VALUES (:nom, :prenom, :dateNaissance, :ville, :rue, :cp, :email, :login, :mdp");
+        $req = PdoHackathons::$monPdo->prepare("INSERT INTO participant(nom, prenom, dateNaissance, ville, rue, cp, email, login, mdp) VALUES (:nom, :prenom, :dateNaissance, :ville, :rue, :cp, :email, :login, :mdp)");
         $req->bindValue(':nom', $nom, PDO::PARAM_STR);
         $req->bindValue(':prenom', $prenom, PDO::PARAM_STR);
         $req->bindValue(':dateNaissance', $dateNaissance, PDO::PARAM_STR);
@@ -24,13 +24,7 @@ class PdoHackathons
         $req->bindValue(':email', $email, PDO::PARAM_STR);
         $req->bindValue(':login', $login, PDO::PARAM_STR);
         $req->bindValue(':mdp', $mdp, PDO::PARAM_STR);
+        dump($req);
 		$req->execute();
-    }
-
-    public function getNbHackathons() {
-        $req = PdoHackathons::$monPdo->prepare('SELECT COUNT(idHackathon) as nombre FROM hackathon');
-		$req->execute();
-		$leNombre = $req->fetch();
-		return $leNombre;
     }
 }

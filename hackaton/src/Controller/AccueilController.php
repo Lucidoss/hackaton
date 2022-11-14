@@ -38,7 +38,7 @@ class AccueilController extends AbstractController
     {
         $nom = '';
         $prenom = '';
-        $dateNaissance = '';
+        $dateNaissance = '2002-11-25';
         $ville = '';
         $rue = '';
         $cp = '';
@@ -47,6 +47,11 @@ class AccueilController extends AbstractController
         $mdp = '';
 
         if(1>2) { // Si le bouton a été cliqué
+            if($nom != '') {
+                dump('Veuillez saisir un nom');
+            } else if ($prenom != '') {
+                dump('Veuillez saisir un prenom');
+            }
             $pdoHackathons->inscrire($nom, $prenom, $dateNaissance, $ville, $rue, $cp, $email, $login, $mdp);
         }
 
