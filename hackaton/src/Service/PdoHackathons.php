@@ -21,14 +21,14 @@ class PdoHackathons
 		return $lesLignes;
     }
 
-    public function getHackathonsTri($Tri) {
-        $req = "select * from hackathon order by :tri";
-        $res->bindParam(':tri', $Tri, PDO::PARAM_STR);
-        $res = PdoHackathons::$monPdo->prepare($req);
-        $res->execute();
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
-    }
+    // public function getHackathonsTri($Tri) {
+    //     $req = "select * from hackathon order by :tri";
+    //     $res = PdoHackathons::$monPdo->prepare($req);
+    //     $res->bindParam(':tri', $Tri, PDO::PARAM_STR);
+    //     $res->execute();
+	// 	$lesLignes = $res->fetchAll();
+	// 	return $lesLignes;
+    // }
 
 }
 // FAIRE LE TRUC SUR SERVICE.YAML

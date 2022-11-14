@@ -30,25 +30,44 @@
 <div style="z-index: -1;position: absolute;">
 
 <h1>Il existe {{ lesHackathons|length() }} Hackathons.</h1>
-
+<input id="searchbar" onkeyup="search_hackathons()" type="text"
+        name="search" placeholder="Rechercher un hackathons">
 
 
 
    {% for hackathon in lesHackathons %}
+   <ol style="list-style: none">
      <div class="col-12">
-            <div class="card" style="width: 18rem">
-			<a href="/hackathon/"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 18rem"/></a>
-			<ul>
-				<li class="list-group-item" >{{ hackathon.THEME }}</li>
-				<li class="list-group-item" >Ville: {{ hackathon.VILLE }}</li>
-				<li class="list-group-item">Rue: {{ hackathon.RUE }}</li>
-				<li class="list-group-item">Du: {{ hackathon.DATEDEBUT|date('d/m/Y') }}</li>
-				<li class="list-group-item">Au: {{ hackathon.DATEFIN|date('d/m/Y') }}</li>
-				<li class="list-group-item">Places: {{ hackathon.NBPLACES }}</li>
-			</ul>
-		</div>
+	 			<div class="hackathon">
+				<li><a href="/hackathon/"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 18rem"/></a></li>
+				<li>{{ hackathon.THEME }}</li>
+				<li>Ville: {{ hackathon.VILLE }}</li>
+				<li>Rue: {{ hackathon.RUE }}</li>
+				<li>Du: {{ hackathon.DATEDEBUT|date('d/m/Y') }}</li>
+				<li>Au: {{ hackathon.DATEFIN|date('d/m/Y') }}</li>
+				<li>Places: {{ hackathon.NBPLACES }}</li>
+				</div>
 	</div>
+	</ol>
     </br>
     {% endfor %} 
+
+<script>
+function search_hackathons() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('hackathon');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";                 
+        }
+    }
+}
+
+</script>
 
 </div>{% endblock %}
