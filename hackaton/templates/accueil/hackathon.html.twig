@@ -31,48 +31,47 @@
 			</div>
 		</ul>
 	</div>
-	<div class="content">
-		<div class="title">
-			Venez découvrir les hackathons du moment !</div>
-	</br>
-	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-		</ol>
-		<div class="carousel-inner" data-mdb-interval="500">
-			<div class="carousel-item active">
-				<img class="d-block w-100" src="{{asset('images/hackathon.jpg')}}" alt="First slide" style="max-height: 50vh">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="{{asset('images/hackathon3.jpg')}}" alt="First slide" style="max-height: 50vh">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="{{asset('images/hackathon4.jpg')}}" alt="Second slide" style="max-height: 50vh">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="{{asset('images/hackathon5.jpg')}}" alt="Third slide" style="max-height: 50vh">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="{{asset('images/hackathon6.jpg')}}" alt="Third slide" style="max-height: 50vh">
-			</div>
-		</div>
-		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
+<div style="z-index: -1;position: absolute;">
+
+<h1>Il existe {{ lesHackathons|length() }} Hackathons.</h1>
+<input id="searchbar" onkeyup="search_hackathons()" type="text"
+        name="search" placeholder="Rechercher un hackathons">
+
+
+
+   {% for hackathon in lesHackathons %}
+   <ol style="list-style: none">
+     <div class="col-12">
+	 			<div class="hackathon">
+				<li><a href="/hackathon/"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 18rem"/></a></li>
+				<li>{{ hackathon.THEME }}</li>
+				<li>Ville: {{ hackathon.VILLE }}</li>
+				<li>Rue: {{ hackathon.RUE }}</li>
+				<li>Du: {{ hackathon.DATEDEBUT|date('d/m/Y') }}</li>
+				<li>Au: {{ hackathon.DATEFIN|date('d/m/Y') }}</li>
+				<li>Places: {{ hackathon.NBPLACES }}</li>
+				</div>
 	</div>
-</br>
-<a href="/inscriptionhackathon">
-<button class="button-81" role="button">
-	<p style="font-size : 20px">
-		Inscrivez-vous à un hackathon ici !</p>
-</button>
-</a></div>{% endblock %}
+	</ol>
+    </br>
+    {% endfor %} 
+
+<script>
+function search_hackathons() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('hackathon');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";                 
+        }
+    }
+}
+
+</script>
+
+</div>{% endblock %}

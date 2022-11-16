@@ -7,7 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Participant;
-use Symfony\Component\BrowserKit\Request;
+use App\Entity\Hackathon;
+
 
 class AccueilController extends AbstractController
 {
@@ -20,10 +21,16 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/hackathon', name: 'app_hackathon')]
-    public function hackathon(): Response
+    public function hackathon(ManagerRegistry $doctrine): Response
     {
+        $repository = $doctrine->getRepository(Hackathon::class);
+        $hackathons = $repository->findBy(
+            array(), // ou [] à la place des () sans array devant
+            array('DATEDEBUT' => 'ASC')
+          );
+
         return $this->render('accueil/hackathon.html.twig', [
-            'controller_name' => 'AccueilController',
+            'lesHackathons' => $hackathons 
         ]);
     }
 
