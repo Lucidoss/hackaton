@@ -81,4 +81,5 @@ class AccueilController extends AbstractController
         $leHackathon = $repository->find($id);
         return $this->render('accueil/detailhackathon.html.twig', ['leHackathon' => $leHackathon]);
     }
+
 }
