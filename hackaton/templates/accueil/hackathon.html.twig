@@ -43,7 +43,6 @@
 </div>
 <div style="z-index: -1;position: absolute;">
 
-<<<<<<< HEAD
 <h1>Il existe {{ lesHackathons|length() }} Hackathons.</h1>
 
 <input id="searchbar" onkeyup="search_hackathons()" type="text"
@@ -122,56 +121,3 @@ function search_hackathons() {
 </script>
 
 </div>{% endblock %}
-=======
-	<h1>Il existe
-		{{ lesHackathons|length() }}
-		Hackathons.</h1>
-</br></br><div class="row">
-
-
-{% for hackathon in lesHackathons %}
-	<div class="col col-md-3">
-		<div class="card" style="margin: 0px auto;
-								    width: 100%;
-								    max-width: 448px;
-								    background: white;
-								    border-radius: 4px;
-									border:none;
-									">
-			<ul style="list-style: none" class="ok">
-				<div class="col-12">
-					<div class="hackathon" style="padding: 20px;">
-
-						<a href="/detailhackathon/{{hackathon.id}}"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 100%"/></a>
-
-					</br>
-					Thème:
-					{{ hackathon.THEME }}
-				</br>
-				<li class="ville">Ville:
-					{{ hackathon.VILLE }}</li>
-			</br>
-			Rue:
-			{{ hackathon.RUE }}
-		</br>
-		Du:
-		{{ hackathon.DATEDEBUT|date("d/m/Y") }}
-	</br>
-	Au:
-	{{ hackathon.DATEFIN|date("d/m/Y") }}
-</br>
-Places:
-{{ hackathon.NBPLACES }}</li></br><a href="/inscriptionhackathon/{{hackathon.id}}" style="decoration:none"><button style="font-size: 16px;
-		    line-height: 28px;
-		    padding: 8px 16px;
-		    width: 100%;
-		    min-height: 44px;
-		    border: unset;
-		    border-radius: 4px;
-		    outline-color: rgb(84 105 212 / 0.5);
-		    background-color: rgb(255, 255, 255);
-		    box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">S'inscrire à ce hackathon</button></a></div></div></ul></br></div></div>{% endfor %}
-			</div>
-			</div>
-			{% endblock %}
->>>>>>> a5945cfffec56181cb2d30557c4803e746d44c90
