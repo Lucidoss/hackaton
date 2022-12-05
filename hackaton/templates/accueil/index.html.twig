@@ -19,7 +19,7 @@
 			<li><a href="/presentation">Presentation</a></li>
 			<li><a href="/hackathon">Hackathons</a></li>
 			<div class="alignement" style="display: table;">
-			<li style="padding-left:200px"><a href="/deconnexion"><img src="{{asset('images/deconnexion.png')}}" style="width:50px"></a></li>
+			<li style="padding-left:200px"><a  href="{{ path('app_logout') }}"><img src="{{asset('images/deconnexion.png')}}" style="width:50px"></a></li>
 			<li><a href="/connexion"><img src="{{asset('images/connexion.png')}}" style="width:50px"></a></li>
 			</div>
 		</ul>
@@ -38,7 +38,7 @@
 		</a>
 	</center>
 </br>
-<a href="/connexion/connecter">
+<a href="/connexion">
 	<button class="button-81" role="button">
 		<p style="font-size : 20px">
 			Déjà membre ? Connecter vous ici !
