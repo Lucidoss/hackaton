@@ -43,7 +43,9 @@
 </div>
 <div style="z-index: -1;position: absolute;">
 
+<<<<<<< HEAD
 <h1>Il existe {{ lesHackathons|length() }} Hackathons.</h1>
+
 <input id="searchbar" onkeyup="search_hackathons()" type="text"
         name="search" placeholder="Rechercher un hackathons" style="font-size: 16px;
     line-height: 28px;
@@ -56,15 +58,15 @@
     background-color: rgb(255, 255, 255);
     box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
 
+
 </br></br>
+
 <div class="row">
 
-<script>
 
 
    {% for hackathon in lesHackathons %}
-   var txt{{ hackathon.ID }}=`
-   <div class="col col-md-3">
+   <div class="container" style="list-style: none">
    <div class="card" style="margin: 0px auto;
     width: 100%;
     max-width: 448px;
@@ -73,7 +75,6 @@
 	border:none;
 	">
    <ol style="list-style: none" class="ok">
-     <div class="col-12">
 	 			<div class="hackathon" style="padding: 20px;">
 				<li><a href=""><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 100%"/></a></li></br>
 				<li>Thème: {{ hackathon.THEME }}</li></br>
@@ -93,25 +94,23 @@
     background-color: rgb(255, 255, 255);
     box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">S'inscrire à ce hackathon</button></a>
 				</div>
-	</div>
 	</ol>
     </br>
 	</div>
-	</div>`;
-	document.write(txt{{ hackathon.ID }});
-    {% endfor %}; 
+	</div>
+    {% endfor %}
 
 	</script>
 </div>
+
 <script>
 function search_hackathons() {
 	//effacer la row
 
     let input = document.getElementById('searchbar').value
     input=input.toLowerCase();
-    let x = document.getElementsByClassName('hackathon');
+    let x = document.getElementsByClassName('container');
     for (i = 0; i < x.length; i++) { 
-		{# si ok document.write(txt{{ hackathon.ID }}); #}
 			if (!x[i].innerHTML.toLowerCase().includes(input)) {
 				x[i].style.display="none";
 			}
@@ -123,3 +122,56 @@ function search_hackathons() {
 </script>
 
 </div>{% endblock %}
+=======
+	<h1>Il existe
+		{{ lesHackathons|length() }}
+		Hackathons.</h1>
+</br></br><div class="row">
+
+
+{% for hackathon in lesHackathons %}
+	<div class="col col-md-3">
+		<div class="card" style="margin: 0px auto;
+								    width: 100%;
+								    max-width: 448px;
+								    background: white;
+								    border-radius: 4px;
+									border:none;
+									">
+			<ul style="list-style: none" class="ok">
+				<div class="col-12">
+					<div class="hackathon" style="padding: 20px;">
+
+						<a href="/detailhackathon/{{hackathon.id}}"><img src={{ hackathon.IMAGE }} alt="Aucune image" style="width: 100%"/></a>
+
+					</br>
+					Thème:
+					{{ hackathon.THEME }}
+				</br>
+				<li class="ville">Ville:
+					{{ hackathon.VILLE }}</li>
+			</br>
+			Rue:
+			{{ hackathon.RUE }}
+		</br>
+		Du:
+		{{ hackathon.DATEDEBUT|date("d/m/Y") }}
+	</br>
+	Au:
+	{{ hackathon.DATEFIN|date("d/m/Y") }}
+</br>
+Places:
+{{ hackathon.NBPLACES }}</li></br><a href="/inscriptionhackathon/{{hackathon.id}}" style="decoration:none"><button style="font-size: 16px;
+		    line-height: 28px;
+		    padding: 8px 16px;
+		    width: 100%;
+		    min-height: 44px;
+		    border: unset;
+		    border-radius: 4px;
+		    outline-color: rgb(84 105 212 / 0.5);
+		    background-color: rgb(255, 255, 255);
+		    box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">S'inscrire à ce hackathon</button></a></div></div></ul></br></div></div>{% endfor %}
+			</div>
+			</div>
+			{% endblock %}
+>>>>>>> a5945cfffec56181cb2d30557c4803e746d44c90
