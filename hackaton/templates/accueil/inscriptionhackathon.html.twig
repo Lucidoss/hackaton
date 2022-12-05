@@ -51,7 +51,7 @@
 							<div class="formbg-inner padding-horizontal--48">
 								<span class="padding-bottom--15">Creer un compte
 								</span>
-								<form id="stripe-login">
+								<form id="stripe-login" action="{{ path('app_inscriptionHack') }}" method="POST">
 								<div class="field padding-bottom--24">
 										<label for="nom">Hackaton Choisi</label>
 										<input type="nom" name="NOM">
