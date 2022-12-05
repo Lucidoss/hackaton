@@ -52,31 +52,42 @@
 								<span class="padding-bottom--15">S'enregistrer à un hackathon
 								</span>
 								<form id="stripe-login">
-								<div class="field padding-bottom--24">
+									<div class="field padding-bottom--24">
 										<label for="nom">Hackaton Choisi</label>
-										<input type="nom" name="nom" disabled value="{{ leHackathon.THEME }}">
+										<input type="nom" name="nom" id="disabledTextInput" value="{{ leHackathon.THEME }}" disabled style="display: block;
+										    width: 100%;
+										    padding: 0.375rem 0.75rem;
+										    font-size: 1rem;
+										    line-height: 1.5;
+										    color: #495057;
+										    background-color: #e9ecef;
+										    background-clip: padding-box;
+										    border: 1px solid #ced4da;
+										    border-radius: 0.25rem;
+										    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+											background-color">
 									</div>
-                                    <div class="field padding-bottom--24">
+									<div class="field padding-bottom--24">
 										<label for="nom">Nom</label>
 										<input type="nom" name="nom">
 									</div>
-                                    <div class="field padding-bottom--24">
+									<div class="field padding-bottom--24">
 										<label for="prenom">Prenom</label>
 										<input type="prenom" name="prenom">
 									</div>
-                                    <div class="field padding-bottom--24">
+									<div class="field padding-bottom--24">
 										<label for="naissance">Date de Naissance</label>
 										<input type="date" name="naissance">
 									</div>
-                                    <div class="field padding-bottom--24">
+									<div class="field padding-bottom--24">
 										<label for="ville">Ville</label>
 										<input type="ville" name="ville">
 									</div>
-                                    <div class="field padding-bottom--24">
+									<div class="field padding-bottom--24">
 										<label for="rue">Rue</label>
 										<input type="rue" name="rue">
 									</div>
-                                    <div class="field padding-bottom--24">
+									<div class="field padding-bottom--24">
 										<label for="cp">Code Postal</label>
 										<input type="cp" name="cp">
 									</div>
@@ -100,8 +111,7 @@
 								</form>
 							</div>
 						</div>
-						<div class="footer-link padding-top--24" style="margin-bottom:40px">
-						</div>
+						<div class="footer-link padding-top--24" style="margin-bottom:40px"></div>
 					</div>
 				</div>
 			</div>
