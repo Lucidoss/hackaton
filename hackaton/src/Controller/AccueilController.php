@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Hackathon;
-
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AccueilController extends AbstractController
 {
@@ -67,11 +67,24 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/inscriptionhackathon/{id}', name: 'app_inscriptionhackathon')]
-    public function inscriptionhackathon(ManagerRegistry $doctrine,$id): Response
+    public function inscriptionhackathon(ManagerRegistry $doctrine,$id,AuthenticationUtils $authenticationUtils): Response
     {
+        if($this->getUser() == NULL){
+            $repository = $doctrine->getRepository(Hackathon::class);
+            $hackathons = $repository->findBy(
+            array(), // ou [] à la place des () sans array devant
+            array('DATEDEBUT' => 'ASC')
+          );
+
+        return $this->render('accueil/hackathon.html.twig', [
+            'lesHackathons' => $hackathons 
+        ]);
+        }
+        else{
         $repository = $doctrine->getRepository(Hackathon::class);
         $leHackathon = $repository->find($id);
         return $this->render('accueil/inscriptionhackathon.html.twig', ['leHackathon' => $leHackathon]);
+        }
     }
 
     #[Route('/detailhackathon/{id}', name: 'app_detailhackathon')]

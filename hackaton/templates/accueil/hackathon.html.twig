@@ -41,16 +41,17 @@
 		</div>
 	</ul>
 </div>
-<div style="z-index: -1;position: absolute;">
+<div style="z-index: -1;position: absolute;width: 100%; padding: 20px;">
 
-<h1>Il existe {{ lesHackathons|length() }} Hackathons.</h1>
+<h1>Il existe</h1> <h1 id="totalHackathon">{{lesHackathons|length()}}</h1> <h1 id="titreHackathon"> hackathons.</h1>
 
-<input id="searchbar" onkeyup="search_hackathons()" type="text"
+<input id="searchbar" class="searchbar" onkeyup="search_hackathons();update_nbhackathon();" type="text"
         name="search" placeholder="Rechercher un hackathons" style="font-size: 16px;
     line-height: 28px;
     padding: 8px 16px;
     width: 100%;
     min-height: 44px;
+	margin-top:20px;
     border: unset;
     border-radius: 4px;
     outline-color: rgb(84 105 212 / 0.5);
@@ -65,13 +66,13 @@
 
 
    {% for hackathon in lesHackathons %}
-   <div class="container" style="list-style: none">
+   <div class="container" style="list-style: none; width:100%;padding:20px;">
    <div class="card" style="margin: 0px auto;
     width: 100%;
     max-width: 448px;
     background: white;
     border-radius: 4px;
-	border:none;
+	box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;
 	">
    <ol style="list-style: none" class="ok">
 	 			<div class="hackathon" style="padding: 20px;">
@@ -82,11 +83,12 @@
 				<li class="date">Du: {{ hackathon.DATEDEBUT|date("d/m/Y") }}</li></br>
 				<li>Au: {{ hackathon.DATEFIN|date("d/m/Y") }}</li></br>
 				<li>Places: {{ hackathon.NBPLACES }}</li></br>
+	
 				<a href="/inscriptionhackathon/{{ hackathon.ID }}" style="decoration:none"><button style="font-size: 16px;
     line-height: 28px;
     padding: 8px 16px;
     width: 100%;
-    min-height: 44px;
+    max-width: 448px;
     border: unset;
     border-radius: 4px;
     outline-color: rgb(84 105 212 / 0.5);
@@ -98,11 +100,10 @@
 	</div>
 	</div>
     {% endfor %}
-
-	</script>
 </div>
 
 <script>
+
 function search_hackathons() {
 	//effacer la row
 
@@ -112,12 +113,36 @@ function search_hackathons() {
     for (i = 0; i < x.length; i++) { 
 			if (!x[i].innerHTML.toLowerCase().includes(input)) {
 				x[i].style.display="none";
+				x[i].classList.remove("nombre");  
 			}
 			else {
-				x[i].style.display="list-item";       
+				x[i].style.display="list-item";  
+				x[i].classList.add("nombre");     
 			}
     }
 }
+
+function update_nbhackathon(){
+	let nb = document.getElementsByClassName('nombre').length; // Nombre de hackathon
+
+	document.getElementById('totalHackathon').innerHTML = document.getElementsByClassName('container').length; // Renvoie le nombre total d'hackathons quand la barre de recherche est vide
+
+	// Changement du mot hackathon avec ou sans 's'
+	if (nb == 1 || nb == 0) {
+		console.log('nb=1')
+		document.getElementById('titreHackathon').innerHTML = 'hackathon'
+	} else {
+		document.getElementById('titreHackathon').innerHTML = 'hackathons'
+	}
+
+	document.getElementById('totalHackathon').innerHTML = document.getElementsByClassName('nombre').length; // Changement dynamique du nombre d'hackathons
+
+}
 </script>
 
+<style>
+h1{
+	display:inline;
+}
+</style>
 </div>{% endblock %}
