@@ -54,31 +54,31 @@
 								<form id="stripe-login" action="{{ path('app_inscription', {uc: 'POST' }) }}" method="POST">
 									<div class="field padding-bottom--24">
 										<label for="nom">Votre Nom</label>
-										<input class="ok" type="text" name="nom" id="nom" minlength="1" maxlength="32" disabled>
+										<input class="ok" type="text" name="nom" id="nom" minlength="1" maxlength="32" disabled value="{{ user.NOM }}">
 									</div>
 									<div class="field padding-bottom--24">
 										<label for="prenom">Votre Prenom</label>
-										<input type="text" name="prenom" minlength="1" maxlength="32" disabled>
+										<input type="text" name="prenom" minlength="1" maxlength="32" disabled value="{{ user.PRENOM }}">
 									</div>
 									<div class="field padding-bottom--24">
 										<label for="naissance">Votre Date de Naissance</label>
-										<input type="date" name="dateNaissance" disabled>
+										<input type="text" name="dateNaissance" disabled value="{{ dateNaissance }}">
 									</div>
 									<div class="field padding-bottom--24">
 										<label for="ville">Votre Ville</label>
-										<input type="text" name="ville" minlength="1" maxlength="64" disabled>
+										<input type="text" name="ville" minlength="1" maxlength="64" disabled value="{{ user.VILLE }}">
 									</div>
 									<div class="field padding-bottom--24">
 										<label for="rue">Votre Rue</label>
-										<input type="text" name="rue" minlength="1" maxlength="128" disabled>
+										<input type="text" name="rue" minlength="1" maxlength="128" disabled value="{{ user.RUE }}">
 									</div>
 									<div class="field padding-bottom--24">
 										<label for="cp">Votre Code Postal</label>
-										<input type="text" name="cp" minlength="5" maxlength="5" disabled>
+										<input type="text" name="cp" minlength="5" maxlength="5" disabled value="{{ user.CP }}">
 									</div>
 									<div class="field padding-bottom--24">
 										<label for="email">Votre Email</label>
-										<input type="email" name="email" minlength="1" maxlength="32" disabled>
+										<input type="email" name="email" minlength="1" maxlength="32" disabled value="{{ user.EMAIL }}">
 									</div>
 								</form>
 							</div>

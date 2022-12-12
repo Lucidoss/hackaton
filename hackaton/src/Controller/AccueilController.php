@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Hackathon;
+use DateTime;
 
 class AccueilController extends AbstractController
 {
@@ -21,7 +22,16 @@ class AccueilController extends AbstractController
     #[Route('/profile', name: 'app_profile')]
     public function profile(): Response
     {
-        return $this->render('accueil/profile.html.twig');
+        $user = $this->getUser();
+        dump($user);
+        $dateNaissance = $this->getUser()->getDATENAISSANCE();
+        $dateNaissance = $dateNaissance->format('d/m/Y');
+        dump($dateNaissance);
+
+        return $this->render('accueil/profile.html.twig', [
+            'user' => $user,
+            'dateNaissance' => $dateNaissance
+        ]);
     }
 
     #[Route('/hackathon', name: 'app_hackathon')]
