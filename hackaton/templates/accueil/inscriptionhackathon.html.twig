@@ -51,7 +51,7 @@
 							<div class="formbg-inner padding-horizontal--48">
 								<span class="padding-bottom--15">S'enregistrer à un hackathon
 								</span>
-								<form id="stripe-login" action="{{ path('app_inscription_hackathon', {uc: 'POST' }) }}" method="POST">
+								<form id="stripe-login" action="{{ path('app_inscription_hackathon', {id: leHackathon.id }) }}" method="POST">
 									<div class="field padding-bottom--24">
 										<label for="hackathon">Hackaton Choisi</label>
 										<input type="hackathon" name="hackathon" id="disabledTextInput" value="{{ leHackathon.THEME }}" disabled style="display: block;
