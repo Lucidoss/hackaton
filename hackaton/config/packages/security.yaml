@@ -4,7 +4,7 @@ security:
     password_hashers:
         App\Entity\Participant:
             #plaintext signifie que les mots de passe ne sont pas hashés
-            algorithm: plaintext
+            algorithm: bcrypt
     providers:
         app_user_provider:
             entity:
