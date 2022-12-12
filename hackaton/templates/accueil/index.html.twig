@@ -17,9 +17,9 @@
 		<ul>
 			<li><a href="/">Accueil</a></li>
 			<li><a href="/presentation">Presentation</a></li>
-			<li><a href="/hackathon">Hackathons</a></li>
+			<li><a href="{{ path('app_hackathon') }}">Hackathons</a></li>
 			<div class="alignement" style="display: table;">
-			<li style="padding-left:200px"><a href="/deconnexion"><img src="{{asset('images/deconnexion.png')}}" style="width:50px"></a></li>
+			<li style="padding-left:200px"><a  href="{{ path('app_logout') }}"><img src="{{asset('images/deconnexion.png')}}" style="width:50px"></a></li>
 			<li><a href="/connexion"><img src="{{asset('images/connexion.png')}}" style="width:50px"></a></li>
 			</div>
 		</ul>
@@ -29,7 +29,7 @@
 			Bienvenue sur Hackat'Agence</div>
 	</br>
 	<center>
-		<a href="/inscription" style="text-decoration: none">
+		<a href="/inscription/inscrire" style="text-decoration: none">
 			<div class="btn from-center">
 				<p>
 					S'inscrire

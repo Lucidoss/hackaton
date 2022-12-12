@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
-use App\Service\PdoHackathons;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Hackathon;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AccueilController extends AbstractController
 {
@@ -34,30 +32,6 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/connexion', name: 'app_connexion')]
-    public function connexion(): Response
-    {
-        return $this->render('accueil/connexion.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
-    }
-
-    #[Route('/inscription', name: 'app_inscription')]
-    public function inscription(): Response
-    {
-        return $this->render('accueil/inscription.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
-    }
-
-    #[Route('/deconnexion', name: 'app_deconnexion')]
-    public function deconnexion(): Response
-    {
-        return $this->render('accueil/deconnexion.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
-    }
-
     #[Route('/presentation', name: 'app_presentation')]
     public function presentation(): Response
     {
@@ -67,7 +41,7 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/inscriptionhackathon/{id}', name: 'app_inscriptionhackathon')]
-    public function inscriptionhackathon(ManagerRegistry $doctrine,$id,AuthenticationUtils $authenticationUtils): Response
+    public function inscriptionhackathon(ManagerRegistry $doctrine, $id): Response
     {
         if($this->getUser() == NULL){
             $repository = $doctrine->getRepository(Hackathon::class);
@@ -79,8 +53,7 @@ class AccueilController extends AbstractController
         return $this->render('accueil/hackathon.html.twig', [
             'lesHackathons' => $hackathons 
         ]);
-        }
-        else{
+        } else{
         $repository = $doctrine->getRepository(Hackathon::class);
         $leHackathon = $repository->find($id);
         return $this->render('accueil/inscriptionhackathon.html.twig', ['leHackathon' => $leHackathon]);
