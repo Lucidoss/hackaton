@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Hackathon;
 
 class AccueilController extends AbstractController
 {
@@ -18,11 +20,23 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/hackathon', name: 'app_hackathon')]
-    public function hackathon(): Response
+    #[Route('/profile', name: 'app_profile')]
+    public function profile(): Response
     {
+        return $this->render('accueil/profile.html.twig');
+    }
+
+    #[Route('/hackathon', name: 'app_hackathon')]
+    public function hackathon(ManagerRegistry $doctrine): Response
+    {
+        $repository = $doctrine->getRepository(Hackathon::class);
+        $hackathons = $repository->findBy(
+            array(), // ou [] à la place des () sans array devant
+            array('DATEDEBUT' => 'ASC')
+          );
+
         return $this->render('accueil/hackathon.html.twig', [
-            'controller_name' => 'AccueilController',
+            'lesHackathons' => $hackathons 
         ]);
     }
 
@@ -34,12 +48,32 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/inscriptionhackathon', name: 'app_inscriptionhackathon')]
-    public function inscriptionhackathon(): Response
+    #[Route('/inscriptionhackathon/{id}', name: 'app_inscriptionhackathon')]
+    public function inscriptionhackathon(ManagerRegistry $doctrine, $id): Response
     {
-        return $this->render('accueil/inscriptionhackathon.html.twig', [
-            'controller_name' => 'AccueilController',
+        if($this->getUser() == NULL){
+            $repository = $doctrine->getRepository(Hackathon::class);
+            $hackathons = $repository->findBy(
+            array(), // ou [] à la place des () sans array devant
+            array('DATEDEBUT' => 'ASC')
+          );
+
+        return $this->render('accueil/hackathon.html.twig', [
+            'lesHackathons' => $hackathons 
         ]);
+        } else{
+        $repository = $doctrine->getRepository(Hackathon::class);
+        $leHackathon = $repository->find($id);
+        return $this->render('accueil/inscriptionhackathon.html.twig', ['leHackathon' => $leHackathon]);
+        }
+    }
+
+    #[Route('/detailhackathon/{id}', name: 'app_detailhackathon')]
+    public function detailhackathon(ManagerRegistry $doctrine,$id): Response
+    {
+        $repository = $doctrine->getRepository(Hackathon::class);
+        $leHackathon = $repository->find($id);
+        return $this->render('accueil/detailhackathon.html.twig', ['leHackathon' => $leHackathon]);
     }
 
 }

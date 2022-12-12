@@ -43,64 +43,24 @@
 				<div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
 					<div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
 						<h1>
-							<a href="/" rel="dofollow">Inscription</a>
+							<a href="/" rel="dofollow">Hackathons</a>
 						</h1>
 					</div>
-					<div class="formbg-outer">
+					<div class="formbg-outer" style="text-align:center">
 						<div class="formbg">
 							<div class="formbg-inner padding-horizontal--48">
-								<span class="padding-bottom--15">Creer un compte
+								<span class="padding-bottom--15">Inscrit avec succès !
+
 								</span>
-								<form id="stripe-login" action="{{ path('app_inscription', {uc: 'POST' }) }}" method="POST">
-                                    <div class="field padding-bottom--24">
-										<label for="nom">Nom</label>
-										<input type="text" name="nom" id="nom" minlength="1" maxlength="32" required>
-									</div>
-                                    <div class="field padding-bottom--24">
-										<label for="prenom">Prenom</label>
-										<input type="text" name="prenom" minlength="1" maxlength="32" required>
-									</div>
-                                    <div class="field padding-bottom--24">
-										<label for="naissance">Date de Naissance</label>
-										<input type="date" name="dateNaissance" required>
-									</div>
-                                    <div class="field padding-bottom--24">
-										<label for="ville">Ville</label>
-										<input type="text" name="ville" minlength="1" maxlength="64" required>
-									</div>
-                                    <div class="field padding-bottom--24">
-										<label for="rue">Rue</label>
-										<input type="text" name="rue" minlength="1" maxlength="128" required>
-									</div>
-                                    <div class="field padding-bottom--24">
-										<label for="cp">Code Postal</label>
-										<input type="text" name="cp" minlength="5" maxlength="5" required>
-									</div>
-									<div class="field padding-bottom--24">
-										<label for="email">Email</label>
-										<input type="email" name="email" minlength="1" maxlength="32" required>
-									</div>
-									<div class="field padding-bottom--24">
-										<div class="grid--50-50">
-											<label for="password">Mot de passe</label>
-										</div>
-										<input type="password" name="mdp" minlength="12" required>
-									</div>
-									<div class="field padding-bottom--24">
-										<input type="submit" name="submit" value="S'inscrire">
-									</div>
-								</form>
+								<div class="field padding-bottom--24">
+									<a href="/"><input type="submit" name="submit" value="Retourner à l'accueil"></a>
+								</div>
 							</div>
 						</div>
-						<div class="footer-link padding-top--24" style="margin-bottom:40px">
-							<span>Déjà membre ?
-								<a href="/connexion">Se connecter</a>
-							</span>
-						</div>
+						<div class="footer-link padding-top--24" style="margin-bottom:40px"></div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</body>
 	</body>
-
-</html>
+</html></div></body></html>

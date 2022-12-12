@@ -49,32 +49,32 @@ class RegisterController extends AbstractController
             return $this->render('accueil/inscription.html.twig');
     }
 
-    #[Route('/inscription/{uc}', name: 'app_inscriptionHack')]
-    public function inscriptionHack(ManagerRegistry $doctrine, $uc): Response
-    {
-        if($uc == "POST") {
-            $inscription = new Inscription();
-            $code = $_POST['code'];
+    // #[Route('/inscription/{uc}', name: 'app_inscriptionHack')]
+    // public function inscriptionHack(ManagerRegistry $doctrine, $uc): Response
+    // {
+    //     if($uc == "POST") {
+    //         $inscription = new Inscription();
+    //         $code = $_POST['code'];
 
-            $inscription->setCode($code);
-            $idparticicpant = $_POST['idparticicpant'];
+    //         $inscription->setCode($code);
+    //         $idparticicpant = $_POST['idparticicpant'];
 
-            $inscription->setIDPARTICIPANT($idparticicpant);
-            $idhackathon = $_POST['idhackathon'];
+    //         $inscription->setIDPARTICIPANT($idparticicpant);
+    //         $idhackathon = $_POST['idhackathon'];
 
-            $inscription->setIDHACKATHON($idhackathon);
-            $dateinscription = $_POST['dateinscription'];
+    //         $inscription->setIDHACKATHON($idhackathon);
+    //         $dateinscription = $_POST['dateinscription'];
 
-            $inscription->setDATEINSCRIPTION(new \DateTime($dateinscription));
+    //         $inscription->setDATEINSCRIPTION(new \DateTime($dateinscription));
             
-            $description = $_POST['description'];
+    //         $description = $_POST['description'];
 
-            $inscription->setDESCRIPTION($description);
+    //         $inscription->setDESCRIPTION($description);
 
-            $entityManager=$doctrine->getManager();
-            $entityManager->persist($inscription);
-            $entityManager->flush();
-        }
-            return $this->render('accueil/inscription.html.twig');
-    }
+    //         $entityManager=$doctrine->getManager();
+    //         $entityManager->persist($inscription);
+    //         $entityManager->flush();
+    //     }
+    //         return $this->render('accueil/inscription.html.twig');
+    // }
 }

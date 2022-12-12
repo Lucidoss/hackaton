@@ -7,21 +7,21 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InscriptionRepository::class)]
+#[ORM\Table(name:'inscription')]
 class Inscription
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name:'CODE')]
     private ?int $id = null;
 
-    #[ORM\Column(name:'CODE')]
-    private ?int $code = null;
+    #[ORM\ManyToOne(targetEntity:Participant::class)]
+    #[ORM\JoinColumn(name: 'IDPARTICIPANT', referencedColumnName:'IDPARTICIPANT')]
+    private ?Participant $PARTICIPANT = null;
 
-    #[ORM\Column]
-    private ?int $IDPARTICIPANT = null;
-
-    #[ORM\Column]
-    private ?int $IDHACKATHON = null;
+    #[ORM\ManyToOne(targetEntity:Hackathon::class)]
+    #[ORM\JoinColumn(name: 'IDHACKATHON', referencedColumnName:'IDHACKATHON')]
+    private ?Hackathon $HACKATHON = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $DATEINSCRIPTION = null;
@@ -34,38 +34,26 @@ class Inscription
         return $this->id;
     }
 
-    public function getCode(): ?int
+    public function getPARTICIPANT(): ?Participant
     {
-        return $this->code;
+        return $this->PARTICIPANT;
     }
 
-    public function setCode(int $code): self
+    public function setPARTICIPANT(Participant $PARTICIPANT): self
     {
-        $this->code = $code;
+        $this->PARTICIPANT = $PARTICIPANT;
 
         return $this;
     }
 
-    public function getIDPARTICIPANT(): ?int
+    public function getHACKATHON(): ?Hackathon
     {
-        return $this->IDPARTICIPANT;
+        return $this->HACKATHON;
     }
 
-    public function setIDPARTICIPANT(int $IDPARTICIPANT): self
+    public function setHACKATHON(Hackathon $HACKATHON): self
     {
-        $this->IDPARTICIPANT = $IDPARTICIPANT;
-
-        return $this;
-    }
-
-    public function getIDHACKATHON(): ?int
-    {
-        return $this->IDHACKATHON;
-    }
-
-    public function setIDHACKATHON(int $IDHACKATHON): self
-    {
-        $this->IDHACKATHON = $IDHACKATHON;
+        $this->HACKATHON = $HACKATHON;
 
         return $this;
     }
