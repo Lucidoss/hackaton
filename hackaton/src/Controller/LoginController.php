@@ -10,15 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class LoginController extends AbstractController
 {
     #[Route('/connexion', name: 'app_login')]
-    public function login (AuthenticationUtils $authenticationUtils): Response {
+    public function login(AuthenticationUtils $authenticationUtils): Response {
         // get the login error if there is one
         $errors = $authenticationUtils->getLastAuthenticationError();
         $lastUsername=$authenticationUtils->getLastUsername();
 
-        $user = $this->getUser()->getUserIdentifier();
-
         return $this->render('accueil/connexion.html.twig', [
-            'lastUsername'=>$lastUsername, 'errors'=>$errors, 'user'=>$user
+            'lastUsername'=>$lastUsername, 'errors'=>$errors
         ]);
     }
 
