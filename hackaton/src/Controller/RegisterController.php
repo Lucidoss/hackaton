@@ -39,7 +39,7 @@ class RegisterController extends AbstractController
             $participant->setEMAIL($email);
             $mdp = $_POST['mdp'];
             
-            $participant->setMDP($mdp);
+            $participant->setMDP(password_hash($mdp, PASSWORD_BCRYPT));
             $participant->setLOGIN(strtolower($prenom[0] . $nom));
 
             $entityManager=$doctrine->getManager();
