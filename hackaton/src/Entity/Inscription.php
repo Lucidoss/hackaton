@@ -12,16 +12,16 @@ class Inscription
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\JoinColumn(name:'CODE')]
+    #[ORM\Column(name:'CODE')]
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity:Participant::class)]
-    #[ORM\JoinColumn(name: 'IDPARTICIPANT')]
-    private ?int $PARTICIPANT = null;
+    #[ORM\JoinColumn(name: 'IDPARTICIPANT', referencedColumnName:'IDPARTICIPANT')]
+    private ?Participant $PARTICIPANT = null;
 
     #[ORM\ManyToOne(targetEntity:Hackathon::class)]
-    #[ORM\JoinColumn(name: 'IDHACKATHON')]
-    private ?int $HACKATHON = null;
+    #[ORM\JoinColumn(name: 'IDHACKATHON', referencedColumnName:'IDHACKATHON')]
+    private ?Hackathon $HACKATHON = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $DATEINSCRIPTION = null;

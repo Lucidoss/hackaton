@@ -18,6 +18,12 @@ class AccueilController extends AbstractController
         ]);
     }
 
+    #[Route('/profile', name: 'app_profile')]
+    public function profile(): Response
+    {
+        return $this->render('accueil/profile.html.twig');
+    }
+
     #[Route('/hackathon', name: 'app_hackathon')]
     public function hackathon(ManagerRegistry $doctrine): Response
     {

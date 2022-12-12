@@ -6,37 +6,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Inscription;
+use App\Entity\Hackathon;
 use Doctrine\Persistence\ManagerRegistry;
 
 class InscriptionHackathonController extends AbstractController
 {
-    #[Route('/inscriptionHackathon/{uc}', name: 'app_inscription_hackathon')]
-    public function inscriptionHackathon(ManagerRegistry $doctrine, $uc): Response
+    #[Route('/inscriptionHackathon/{id}', name: 'app_inscription_hackathon')]
+    public function inscriptionHackathon(ManagerRegistry $doctrine, $id): Response
     {
-        if($uc == "POST") {
+        if(isset($_POST['submit'])) {
             $inscription = new Inscription();
 
-            $idParticipant = $this->getUser()->getUserIdentifier();
-            dump($idParticipant);
-            // $inscription->setPARTICIPANT($idParticipant);
+            $participant = $this->getUser();
+            dump($participant);
+            $inscription->setPARTICIPANT($participant);
 
-            $idHackhathon = $_POST['idHackhathon'];
-            $inscription->setHACKATHON($idHackhathon);
+            $hackhathon = $doctrine->getRepository(Hackathon::class)->find($id);
+            dump($hackhathon);
+            $inscription->setHACKATHON($hackhathon);
 
-            $dateInscription = $_POST['dateInscription'];
+            $time = new \DateTime();
+            $time = date('d/m/Y');
+            $dateInscription = $time;
+            dump($time);
             $inscription->setDATEINSCRIPTION(new \DateTime($dateInscription));
 
-            $description = $_POST['description'];
-            $inscription->setDESCRIPTION($description);
+            $competences = $_POST['competences'];
+            dump($competences);
+            $inscription->setDESCRIPTION($competences);
 
+            dump($inscription);
             $entityManager=$doctrine->getManager();
             $entityManager->persist($inscription);
             $entityManager->flush();
 
-            // return $this->render('inscription_hackathon/inscriptionHackathonConfirmation.html.twig', [
-            //     'controller_name' => 'InscriptionHackathonController',
-            // ]);
+            return $this->render('inscription_hackathon/inscriptionHackathonConfirmation.html.twig');
         }
-        return $this->render('accueil/inscriptionhackathon.html.twig');
     }
 }

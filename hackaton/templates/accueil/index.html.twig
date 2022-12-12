@@ -15,33 +15,54 @@
 	<label for="active" class="close"></label>
 	<div class="wrapper">
 		<ul>
-			<li><a href="/">Accueil</a></li>
-			<li><a href="/presentation">Presentation</a></li>
+			<li><a href="{{ path('app_accueil') }}">Accueil</a></li>
+			<li><a href="{{ path('app_presentation') }}">Presentation</a></li>
 			<li><a href="{{ path('app_hackathon') }}">Hackathons</a></li>
 			<div class="alignement" style="display: table;">
-			<li style="padding-left:200px"><a  href="{{ path('app_logout') }}"><img src="{{asset('images/deconnexion.png')}}" style="width:50px"></a></li>
-			<li><a href="/connexion"><img src="{{asset('images/connexion.png')}}" style="width:50px"></a></li>
+			<li style="padding-left:200px"><a  href="{{ path('app_logout') }}"><img src="{{ asset('images/deconnexion.png') }}" style="width:50px"></a></li>
+			<li>
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<a href="{{ path('app_profile') }}"><img src="{{ asset('images/connexion.png') }}" style="width:50px"></a>
+			{% else %}
+				<a href="{{ path('app_login') }}"><img src="{{ asset('images/connexion.png') }}" style="width:50px"></a>
+			{% endif %}
+			</li>
 			</div>
 		</ul>
 	</div>
 	<div class="content">
 		<div class="title">
-			Bienvenue sur Hackat'Agence</div>
+			Bienvenue sur Hackat'Agence
+		</div>
 	</br>
-	<center>
-		<a href="/inscription/inscrire" style="text-decoration: none">
-			<div class="btn from-center">
-				<p>
-					S'inscrire
+	{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+		<center>
+			<a href="/inscription/inscrire" style="text-decoration: none">
+				<div class="btn from-center">
+					<p>
+						S'inscrire
+					</p>
+				</div>
+			</a>
+		</center>
+		</br>
+		<a href="{{ path('app_login') }}">
+			<button class="button-81" role="button">
+				<p style="font-size : 20px">
+					Déjà membre ? Connecter vous ici !
 				</p>
-			</div>
+			</button>
 		</a>
-	</center>
-</br>
-<a href="/connexion">
-	<button class="button-81" role="button">
-		<p style="font-size : 20px">
-			Déjà membre ? Connecter vous ici !
-		</p>
-	</button>
-</a></div>{% endblock %}
+	{% else %}
+		<center>
+			<a href="{{ path('app_hackathon') }}" style="text-decoration: none">
+				<div class="btn from-center">
+					<p>
+						Hackathons
+					</p>
+				</div>
+			</a>
+		</center>
+	{% endif %}
+	</div>
+{% endblock %}
