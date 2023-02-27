@@ -18,24 +18,19 @@ class InscriptionHackathonController extends AbstractController
             $inscription = new Inscription();
 
             $participant = $this->getUser();
-            dump($participant);
             $inscription->setPARTICIPANT($participant);
 
             $hackhathon = $doctrine->getRepository(Hackathon::class)->find($id);
-            dump($hackhathon);
             $inscription->setHACKATHON($hackhathon);
 
             $time = new \DateTime();
-            $time = date('d/m/Y');
+            $time = date('d-m-Y');
             $dateInscription = $time;
-            dump($time);
             $inscription->setDATEINSCRIPTION(new \DateTime($dateInscription));
 
             $competences = $_POST['competences'];
-            dump($competences);
             $inscription->setDESCRIPTION($competences);
 
-            dump($inscription);
             $entityManager=$doctrine->getManager();
             $entityManager->persist($inscription);
             $entityManager->flush();
