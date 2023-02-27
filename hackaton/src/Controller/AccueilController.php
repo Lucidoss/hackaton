@@ -6,13 +6,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Participant;
 use App\Entity\Hackathon;
-<<<<<<< HEAD
-use App\Entity\Participant;
-=======
-use App\Entity\Hackathon;
->>>>>>> Se-connecter
 
 class AccueilController extends AbstractController
 {

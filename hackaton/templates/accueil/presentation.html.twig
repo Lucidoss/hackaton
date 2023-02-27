@@ -26,8 +26,12 @@
 			<li><a href="/presentation">Presentation</a></li>
 			<li><a href="/hackathon">Hackathons</a></li>
 			<div class="alignement" style="display: table;">
-			<li style="padding-left:200px"><a href="/deconnexion"><img src="{{asset('images/deconnexion.png')}}" style="width:50px"></a></li>
-			<li><a href="/connexion"><img src="{{asset('images/connexion.png')}}" style="width:50px"></a></li>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<li style="padding-left:200px"><a  href="{{ path('app_logout') }}"><img src="{{ asset('images/deconnexion.png') }}" style="width:50px"></a></li>
+					<li><a href="{{ path('app_profile') }}"><img src="{{ asset('images/connexion.png') }}" style="width:50px"></a></li>
+				{% else %}
+					<li><a href="{{ path('app_login') }}"><img src="{{ asset('images/connexion.png') }}" style="width:50px"></a></li>
+				{% endif %}
 			</div>
 		</ul>
 	</div>
