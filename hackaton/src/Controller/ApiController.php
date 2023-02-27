@@ -39,7 +39,7 @@ class ApiController extends AbstractController
                 'nbPlaces'=>$unHackathon->getNBPLACES(),
             ];
         }
-        return new JsonResponse($tableau);
+        return new JsonResponse($tableau, 200, ['Access-Control-Allow-Origin' => '*']);
     }
 
     // #[Route('/api/hackathons/{id}', name: 'app_api_hackathon_id', methods: ['GET'])]
