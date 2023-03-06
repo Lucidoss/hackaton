@@ -39,6 +39,15 @@ class HackathonRepository extends ServiceEntityRepository
         }
     }
 
+    // public function listHackathon() {
+    //     $this->createQueryBuilder('inscription')
+    //         ->andWhere('inscription.IDHACKATHON = :idHackathon')
+    //         ->setParameter('IDHACKATHON', $idHackathon)
+    //         ->select('SUM(*) as nombreInscription')
+
+    //     SELECT count(*) as nombreInscription FROM `inscription` WHERE IDHACKATHON = 2;
+    // }
+
 //    /**
 //     * @return Hackathon[] Returns an array of Hackathon objects
 //     */

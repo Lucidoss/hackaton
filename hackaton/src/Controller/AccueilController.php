@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Hackathon;
+use App\Entity\Inscription;
 
 class AccueilController extends AbstractController
 {
@@ -30,16 +31,27 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/hackathon', name: 'app_hackathon')]
-    public function hackathon(ManagerRegistry $doctrine): Response
+    public function hackathon(ManagerRegistry $doctrine/*, $idHackathon*/): Response
     {
-        $repository = $doctrine->getRepository(Hackathon::class);
-        $hackathons = $repository->findBy(
+        $repoHackathon = $doctrine->getRepository(Hackathon::class);
+        $hackathons = $repoHackathon->findBy(
             array(), // ou [] à la place des () sans array devant
             array('DATEDEBUT' => 'ASC')
-          );
+        );
+
+        // $repoInscription = $doctrine->getRepository(Inscription::class);
+        // $em = $this->getEntityManager();
+        // $query = $em->createQuery("SELECT count(*) as nombreInscription FROM `inscription` WHERE IDHACKATHON = 2;");
+
+        // $nombreInscription = $query->getSingleScalarResult();
+        
+            
+
+        //  SELECT count(*) as nombreInscription FROM `inscription` WHERE IDHACKATHON = 2;
 
         return $this->render('accueil/hackathon.html.twig', [
-            'lesHackathons' => $hackathons 
+            'lesHackathons' => $hackathons,
+            // 'nombreInscription' => $nombreInscription
         ]);
     }
 

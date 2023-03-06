@@ -5,6 +5,7 @@ namespace App\Controller;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Hackathon;
 use App\Entity\Atelier;
+use App\Entity\Evenement;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -83,12 +84,41 @@ class ApiController extends AbstractController
             $tableau[]=[
                 'id'=>$unAtelier->getId(),
                 'nbPlaces'=>$unAtelier->getNBPARTICIPANTS(),
-                'dateFin'=>$unAtelier->getNOMEVENEMENT(),
+                'nomEvenement'=>$unAtelier->getNOMEVENEMENT(),
                 'dateDebut'=>$unAtelier->getDATEDEBUT(),
                 'dateFin'=>$unAtelier->getDATEFIN(),
                 'duree'=>$unAtelier->getDUREE()
             ];
         }
         return new JsonResponse($tableau);
+    }
+
+    #[Route('/api/hackathons/{idHackathon}/ateliers', name: 'app_api_ateliers_by_hackathon', methods: ['GET'])]
+    public function getListeAteliersByHackathon(ManagerRegistry $doctrine, $idHackathon): Response
+    {
+        $repositoryAtelier = $doctrine->getRepository(Atelier::class);
+
+        $repositoryHackathon = $doctrine->getRepository(Hackathon::class);
+        $leHackathon = $repositoryHackathon->find($idHackathon);
+
+        $lesAteliers = $repositoryAtelier->findBy(array('HACKATHON' => $idHackathon));
+        dump($lesAteliers);
+
+        if ($leHackathon !== null) {
+            $tableau= [];
+            foreach($lesAteliers as $unAtelier) {
+                $tableau[]=[
+                    'id'=>$unAtelier->getId(),
+                    'nbPlaces'=>$unAtelier->getNBPARTICIPANTS(),
+                    'nomEvenement'=>$unAtelier->getNOMEVENEMENT(),
+                    'dateDebut'=>$unAtelier->getDATEDEBUT(),
+                    'dateFin'=>$unAtelier->getDATEFIN(),
+                    'duree'=>$unAtelier->getDUREE()
+                ];
+            }
+            return new JsonResponse($tableau);
+        } else {
+            return new JsonResponse(['message' => 'Hackathon not found'], Response::HTTP_NOT_FOUND);
+        }
     }
 }
