@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Hackathon;
+use App\Entity\Participant;
 use App\Entity\Inscription;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AccueilController extends AbstractController
 {
@@ -25,9 +27,30 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/profile', name: 'app_profile')]
-    public function profile(): Response
+    public function profile(ManagerRegistry $doctrine): Response
     {
-        return $this->render('accueil/profile.html.twig');
+        $user = $this->getUser();
+
+        $repoHackathon = $doctrine->getRepository(Hackathon::class);
+        $repoInscription = $doctrine->getRepository(Inscription::class);
+        
+        // var_dump($user);
+        
+        $userId = $user->getId();
+        $mesInscriptions = $repoInscription->findBy(array('PARTICIPANT' => $userId));
+        
+        $mesHackathons = $repoHackathon->findBy(array('id' => $mesInscriptions));
+        
+        dump($mesInscriptions);
+        dump($mesHackathons);
+        // var_dump($mesInscriptions);
+        // var_dump($mesHackathons);
+
+        return $this->render('accueil/profile.html.twig', [
+            'leProfil' => $user,
+            'lesInscriptions' => $mesInscriptions,
+            'id' => $userId
+        ]);
     }
 
     #[Route('/hackathon', name: 'app_hackathon')]
