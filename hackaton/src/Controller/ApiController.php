@@ -5,6 +5,7 @@ namespace App\Controller;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Hackathon;
 use App\Entity\Atelier;
+use App\Entity\CommentaireAtelier;
 use App\Entity\ParticipantAtelier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -126,7 +127,6 @@ class ApiController extends AbstractController
     public function addInscriptionAtelier(ManagerRegistry $doctrine, $idAtelier, Request $request): Response
     {
         $json = json_decode($request->getContent(), true);
-        dump($json);
         $repositoryAtelier = $doctrine->getRepository(Atelier::class);
         $leAtelier = $repositoryAtelier->find($idAtelier);
 
@@ -142,7 +142,33 @@ class ApiController extends AbstractController
             $d->persist($participantAtelier);
             $d->flush();
 
-            return new JsonResponse(['message' => 'Atelier created'], Response::HTTP_CREATED);
+            return new JsonResponse(['message' => 'Inscription à un atelier crée'], Response::HTTP_CREATED);
+        } else {
+            return new JsonResponse(['message' => 'Atelier not found'], Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    #[Route('/api/atelier/{idAtelier}/commentaire', name: 'app_api_add_commentaire_atelier', methods: ['POST'])]
+    public function addCommentaireAtelier(ManagerRegistry $doctrine, $idAtelier, Request $request): Response
+    {
+        $json = json_decode($request->getContent(), true);
+        dump($request);
+        dump($json);
+        $repositoryAtelier = $doctrine->getRepository(Atelier::class);
+        $leAtelier = $repositoryAtelier->find($idAtelier);
+
+        $commentaireAtelier = new CommentaireAtelier();
+
+        if ($leAtelier !== null) {
+            $commentaireAtelier->setEMAIL($json['email']);
+            $commentaireAtelier->setCOMMENTAIRE($json['commentaire']);
+            $commentaireAtelier->setIDATELIER($leAtelier);
+
+            $d = $doctrine->getManager();
+            $d->persist($commentaireAtelier);
+            $d->flush();
+
+            return new JsonResponse(['message' => 'Commentaire crée'], Response::HTTP_CREATED);
         } else {
             return new JsonResponse(['message' => 'Atelier not found'], Response::HTTP_NOT_FOUND);
         }
