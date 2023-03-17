@@ -20,7 +20,7 @@
 						<div class="formbg-inner padding-horizontal--48">
 							<span class="padding-bottom--15">Mes informations
 							</span>
-							<form id="stripe-login" action="{{ path('app_inscription', {uc: 'POST' }) }}" method="POST"> {# modifier pour le PUT ou supp le form pour afficher les infos mais pas les modifier #}
+							<form id="stripe-login" action="{{ path('app_inscription', {uc: 'POST' }) }}" method="POST">
                                 <div class="field padding-bottom--24">
 									<label for="nom">Nom</label>
 									<input type="text" name="nom" id="nom" minlength="1" maxlength="32" required value='{{ leProfil.Nom }}'>
@@ -49,13 +49,6 @@
 									<label for="email">Email</label>
 									<input type="email" name="email" minlength="1" maxlength="32" required value='{{ leProfil.Email }}'>
 								</div>
-                                {# <div class="field padding-bottom--24">
-									<label for="mdp">Email</label>
-									<input type="mdp" name="mdp" minlength="1" maxlength="32" required value='{{ leProfil.mdp }}'>
-								</div> #}
-								{# <div class="field padding-bottom--24">
-									<input type="submit" name="submit" value="Enregistrer">
-								</div> #}
 							</form>
 							{% if lesInscriptions == true %}
 								<span class="padding-bottom--15">Mes Hacakthons

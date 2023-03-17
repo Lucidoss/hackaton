@@ -31,25 +31,14 @@ class AccueilController extends AbstractController
     {
         $user = $this->getUser();
 
-        $repoHackathon = $doctrine->getRepository(Hackathon::class);
         $repoInscription = $doctrine->getRepository(Inscription::class);
-        
-        // var_dump($user);
-        
+
         $userId = $user->getId();
         $mesInscriptions = $repoInscription->findBy(array('PARTICIPANT' => $userId));
-        
-        $mesHackathons = $repoHackathon->findBy(array('id' => $mesInscriptions));
-        
-        dump($mesInscriptions);
-        dump($mesHackathons);
-        // var_dump($mesInscriptions);
-        // var_dump($mesHackathons);
 
         return $this->render('accueil/profile.html.twig', [
             'leProfil' => $user,
-            'lesInscriptions' => $mesInscriptions,
-            'id' => $userId
+            'lesInscriptions' => $mesInscriptions
         ]);
     }
 
