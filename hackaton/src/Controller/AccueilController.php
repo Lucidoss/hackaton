@@ -91,16 +91,61 @@ class AccueilController extends AbstractController
         return $this->render('accueil/detailhackathon.html.twig', ['leHackathon' => $leHackathon]);
     }
 
-    #[Route('/favoris/', name: 'app_favoris')]
-    public function favoris(): Response
+    #[Route('/favoris', name: 'app_favoris')]
+    public function favorisHackathon(ManagerRegistry $doctrine): Response
     {
         $repoHackathon = $doctrine->getRepository(Hackathon::class);
         $hackathons = $repoHackathon->findBy(
             array(), // ou [] à la place des () sans array devant
             array('DATEDEBUT' => 'ASC')
         );
-        $hackathons = $repository->find($id);
-        return $this->render('accueil/favoris.html.twig');
+
+        // $repoInscription = $doctrine->getRepository(Inscription::class);
+        // $em = $this->getEntityManager();
+        // $query = $em->createQuery("SELECT count(*) as nombreInscription FROM `inscription` WHERE IDHACKATHON = 2;");
+
+        // $nombreInscription = $query->getSingleScalarResult();
+        
+            
+
+        //  SELECT count(*) as nombreInscription FROM `inscription` WHERE IDHACKATHON = 2;
+
+        return $this->render('accueil/favoris.html.twig', [
+            'lesHackathons' => $hackathons,
+            // 'nombreInscription' => $nombreInscription
+        ]);
     }
 
+    #[Route('/confirmationfavoris/{id}', name: 'app_confirmation_favoris')]
+    public function ajoutFavoris(ManagerRegistry $doctrine, $id): Response
+    {
+        if(isset($_POST['submit'])) {
+            $inscription = new Inscription();
+
+            $participant = $this->getUser();
+            $inscription->setPARTICIPANT($participant);
+
+            $hackhathon = $doctrine->getRepository(Hackathon::class)->find($id);
+            $inscription->setHACKATHON($hackhathon);
+
+            $time = new \DateTime();
+            $time = date('d-m-Y');
+            $dateInscription = $time;
+            $inscription->setDATEINSCRIPTION(new \DateTime($dateInscription));
+
+            $competences = $_POST['competences'];
+            $inscription->setDESCRIPTION($competences);
+
+            $entityManager=$doctrine->getManager();
+            $entityManager->persist($inscription);
+            $entityManager->flush();
+            return $this->render('accueil/confirmationHackathonFavoris.html.twig');
+        }
+        }
+
+        #[Route('/suppressionfavoris', name: 'app_suppression_favoris')]
+    public function suppressionFavoris(): Response
+    {
+        return $this->render('accueil/confirmationSuppressionFavoris.html.twig');
+    }
 }
