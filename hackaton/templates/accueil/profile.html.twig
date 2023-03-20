@@ -23,31 +23,108 @@
 							<form id="stripe-login" action="{{ path('app_inscription', {uc: 'POST' }) }}" method="POST">
                                 <div class="field padding-bottom--24">
 									<label for="nom">Nom</label>
-									<input type="text" name="nom" id="nom" minlength="1" maxlength="32" required value='{{ leProfil.Nom }}'>
+									<input type="text" name="nom" id="nom" minlength="1" maxlength="32" required value='{{ leProfil.Nom }}' disabled style="display: block;
+																												    width: 100%;
+																												    padding: 0.375rem 0.75rem;
+																												    font-size: 1rem;
+																												    line-height: 1.5;
+																												    color: #495057;
+																												    background-color: #e9ecef;
+																												    background-clip: padding-box;
+																												    border: 1px solid #ced4da;
+																												    border-radius: 0.25rem;
+																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+																													background-color">
 								</div>
 								<div class="field padding-bottom--24">
 									<label for="prenom">Prenom</label>
-									<input type="text" name="prenom" minlength="1" maxlength="32" required value='{{ leProfil.Prenom }}'>
+									<input type="text" name="prenom" minlength="1" maxlength="32" required value='{{ leProfil.Prenom }}'disabled style="display: block;
+																												    width: 100%;
+																												    padding: 0.375rem 0.75rem;
+																												    font-size: 1rem;
+																												    line-height: 1.5;
+																												    color: #495057;
+																												    background-color: #e9ecef;
+																												    background-clip: padding-box;
+																												    border: 1px solid #ced4da;
+																												    border-radius: 0.25rem;
+																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+																													background-color">
 								</div>
 								<div class="field padding-bottom--24">
 									<label for="naissance">Date de Naissance</label>
-									<input type="date" name="dateNaissance" required value='{{ leProfil.DateNaissance|date('Y-m-d') }}'>
+									<input type="date" name="dateNaissance" required value='{{ leProfil.DateNaissance|date('Y-m-d') }}'disabled style="display: block;
+																												    width: 100%;
+																												    padding: 0.375rem 0.75rem;
+																												    font-size: 1rem;
+																												    line-height: 1.5;
+																												    color: #495057;
+																												    background-color: #e9ecef;
+																												    background-clip: padding-box;
+																												    border: 1px solid #ced4da;
+																												    border-radius: 0.25rem;
+																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+																													background-color">
 								</div>
 								<div class="field padding-bottom--24">
 									<label for="ville">Ville</label>
-									<input type="text" name="ville" minlength="1" maxlength="64" required value='{{ leProfil.Ville }}'>
+									<input type="text" name="ville" minlength="1" maxlength="64" required value='{{ leProfil.Ville }}'disabled style="display: block;
+																												    width: 100%;
+																												    padding: 0.375rem 0.75rem;
+																												    font-size: 1rem;
+																												    line-height: 1.5;
+																												    color: #495057;
+																												    background-color: #e9ecef;
+																												    background-clip: padding-box;
+																												    border: 1px solid #ced4da;
+																												    border-radius: 0.25rem;
+																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+																													background-color">
 								</div>
 								<div class="field padding-bottom--24">
 									<label for="rue">Rue</label>
-									<input type="text" name="rue" minlength="1" maxlength="128" required value='{{ leProfil.Rue }}'>
+									<input type="text" name="rue" minlength="1" maxlength="128" required value='{{ leProfil.Rue }}'disabled style="display: block;
+																												    width: 100%;
+																												    padding: 0.375rem 0.75rem;
+																												    font-size: 1rem;
+																												    line-height: 1.5;
+																												    color: #495057;
+																												    background-color: #e9ecef;
+																												    background-clip: padding-box;
+																												    border: 1px solid #ced4da;
+																												    border-radius: 0.25rem;
+																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+																													background-color">
 								</div>
 								<div class="field padding-bottom--24">
 									<label for="cp">Code Postal</label>
-									<input type="text" name="cp" minlength="5" maxlength="5" required value='{{ leProfil.CP }}'>
+									<input type="text" name="cp" minlength="5" maxlength="5" required value='{{ leProfil.CP }}' disabled style="display: block;
+																												    width: 100%;
+																												    padding: 0.375rem 0.75rem;
+																												    font-size: 1rem;
+																												    line-height: 1.5;
+																												    color: #495057;
+																												    background-color: #e9ecef;
+																												    background-clip: padding-box;
+																												    border: 1px solid #ced4da;
+																												    border-radius: 0.25rem;
+																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+																													background-color">
 								</div>
 								<div class="field padding-bottom--24">
 									<label for="email">Email</label>
-									<input type="email" name="email" minlength="1" maxlength="32" required value='{{ leProfil.Email }}'>
+									<input type="email" name="email" minlength="1" maxlength="32" required value='{{ leProfil.Email }}'disabled style="display: block;
+																												    width: 100%;
+																												    padding: 0.375rem 0.75rem;
+																												    font-size: 1rem;
+																												    line-height: 1.5;
+																												    color: #495057;
+																												    background-color: #e9ecef;
+																												    background-clip: padding-box;
+																												    border: 1px solid #ced4da;
+																												    border-radius: 0.25rem;
+																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+																													background-color">
 								</div>
 							</form>
 							{% if lesInscriptions == true %}
@@ -62,8 +139,6 @@
 							{% endif %}
 						</div>
 						<div class="footer-link padding-top--24" style="margin-bottom:40px">
-						<span>
-						</span>
 					</div>
 				</div>
 			</div>
