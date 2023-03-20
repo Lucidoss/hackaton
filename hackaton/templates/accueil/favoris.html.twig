@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hackathons
+{% block title %}Favoris
 {% endblock %}
 {% block body %}
 	{{ include('navbar.html.twig') }}
@@ -29,7 +29,7 @@
 				<td>{{ hackathon.LIEU }}</td>
 				<td>{{ hackathon.CP }}</td>
 				<td>
-					<a href="/detailhackathon/{{ hackathon.ID }}" style="decoration:none">
+					<a href="/detailhackathon/{{ hackathon.IDHACKATHON }}" style="decoration:none">
 						<button style="font-size: 16px;
 															line-height: 28px;
 															padding: 8px 16px;
@@ -44,7 +44,7 @@
 					</a>
 				</td>
 				<td>
-					<a href="/suppressionfavoris" style="decoration:none">
+					<a href="/suppressionfavoris/{{ hackathon.IDFAVORIS }}" style="decoration:none">
 						<button style="font-size: 16px;
 															line-height: 28px;
 															padding: 8px 16px;

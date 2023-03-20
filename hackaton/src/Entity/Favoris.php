@@ -6,26 +6,21 @@ use App\Repository\FavorisRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FavorisRepository::class)]
+#[ORM\Table(name:'favoris')]
 class Favoris
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column]
+    #[ORM\Column(name:'IDFAVORIS')]
     private ?int $IDFAVORIS = null;
 
-    #[ORM\Column]
-    private ?int $IDPARTICIPANT = null;
+    #[ORM\ManyToOne(targetEntity:Participant::class)]
+    #[ORM\JoinColumn(name: 'IDPARTICIPANT', referencedColumnName:'IDPARTICIPANT')]
+    private ?Participant $IDPARTICIPANT = null;
 
-    #[ORM\Column]
-    private ?int $IDHACKATHON = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    #[ORM\ManyToOne(targetEntity:Hackathon::class)]
+    #[ORM\JoinColumn(name: 'IDHACKATHON', referencedColumnName:'IDHACKATHON')]
+    private ?Hackathon $IDHACKATHON = null;
 
     public function getIDFAVORIS(): ?int
     {
@@ -39,24 +34,24 @@ class Favoris
         return $this;
     }
 
-    public function getIDPARTICIPANT(): ?int
+    public function getPARTICIPANT(): ?Participant
     {
         return $this->IDPARTICIPANT;
     }
 
-    public function setIDPARTICIPANT(int $IDPARTICIPANT): self
+    public function setPARTICIPANT(Participant $IDPARTICIPANT): self
     {
         $this->IDPARTICIPANT = $IDPARTICIPANT;
 
         return $this;
     }
 
-    public function getIDHACKATHON(): ?int
+    public function getHACKATHON(): ?Hackathon
     {
         return $this->IDHACKATHON;
     }
 
-    public function setIDHACKATHON(int $IDHACKATHON): self
+    public function setHACKATHON(Hackathon $IDHACKATHON): self
     {
         $this->IDHACKATHON = $IDHACKATHON;
 
