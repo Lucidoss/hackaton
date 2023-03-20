@@ -103,4 +103,16 @@ class AccueilController extends AbstractController
         return $this->render('accueil/detailhackathon.html.twig', ['leHackathon' => $leHackathon]);
     }
 
+    #[Route('/favoris/', name: 'app_favoris')]
+    public function favoris(): Response
+    {
+        $repoHackathon = $doctrine->getRepository(Hackathon::class);
+        $hackathons = $repoHackathon->findBy(
+            array(), // ou [] à la place des () sans array devant
+            array('DATEDEBUT' => 'ASC')
+        );
+        $hackathons = $repository->find($id);
+        return $this->render('accueil/favoris.html.twig');
+    }
+
 }
