@@ -53,21 +53,35 @@
 									<div class="grid--50-50">
 										<label for="password">Mot de passe</label>
 									</div>
-									<input type="password" name="mdp" minlength="12" required>
-								</div>
-								<div class="field padding-bottom--24">
-									<input type="submit" name="submit" value="S'inscrire">
-								</div>
-							</form>
+										<input type="password" name="mdp" id="myInput" minlength="12" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 12 caractères ou plus">
+									</div>
+									<div class="padding-bottom--24">
+									<input type="checkbox" onclick="myFunction()"> Afficher le mot de passe
+									</div>
+									<div class="field padding-bottom--24">
+										<input type="submit" name="submit" value="S'inscrire">
+									</div>
+								</form>
+							</div>
 						</div>
-					</div>
-					<div class="footer-link padding-top--24" style="margin-bottom:40px">
-						<span>Déjà membre ?
-							<a href="/connexion">Se connecter</a>
-						</span>
+						<div class="footer-link padding-top--24" style="margin-bottom:40px">
+							<span>Déjà membre ?
+								<a href="/connexion">Se connecter</a>
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</body>
 	</body>
 </html></div></body></html>
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
