@@ -13,6 +13,9 @@ class Atelier extends Evenement
     #[ORM\Column]
     private ?int $NBPARTICIPANTS = null;
 
+    #[ORM\Column]
+    private ?int $NBPLACESRESTANTES = null;
+
     public function getNBPARTICIPANTS(): ?int
     {
         return $this->NBPARTICIPANTS;
@@ -21,6 +24,18 @@ class Atelier extends Evenement
     public function setNBPARTICIPANTS(int $NBPARTICIPANTS): self
     {
         $this->NBPARTICIPANTS = $NBPARTICIPANTS;
+
+        return $this;
+    }
+
+    public function getNBPLACESRESTANTES(): ?int
+    {
+        return $this->NBPLACESRESTANTES;
+    }
+
+    public function setNBPLACESRESTANTES(int $NBPLACESRESTANTES): self
+    {
+        $this->NBPLACESRESTANTES = $NBPLACESRESTANTES;
 
         return $this;
     }
