@@ -105,18 +105,30 @@ class ApiController extends AbstractController
 
         $lesAteliers = $repositoryAtelier->findBy(array('HACKATHON' => $idHackathon));
 
+        $repositoryParticipantsAtelier = $doctrine->getRepository(ParticipantAtelier::class);
+
         if ($leHackathon !== null) {
-            $tableau= [];
+            $tableau = [];
+            $tableauEmail = [];
             foreach($lesAteliers as $unAtelier) {
+                $participantsAtelier = $repositoryParticipantsAtelier->findBy(array('IDATELIER' => $unAtelier->getId()));
+                foreach ($participantsAtelier as $unParticipantAtelier) {
+                    array_push($tableauEmail, $unParticipantAtelier->getEMAIL());
+                }
+
                 $tableau[]=[
-                    'id'=>$unAtelier->getId(),
-                    'nbPlaces'=>$unAtelier->getNBPARTICIPANTS(),
-                    'nomEvenement'=>$unAtelier->getNOMEVENEMENT(),
-                    'dateDebut'=>$unAtelier->getDATEDEBUT(),
-                    'dateFin'=>$unAtelier->getDATEFIN(),
-                    'duree'=>$unAtelier->getDUREE()
+                    'id' => $unAtelier->getId(),
+                    'nbPlaces' => $unAtelier->getNBPARTICIPANTS(),
+                    'nbPlacesRestantes' => $unAtelier->getNBPLACESRESTANTES(),
+                    'nomEvenement' => $unAtelier->getNOMEVENEMENT(),
+                    'dateDebut' => $unAtelier->getDATEDEBUT(),
+                    'dateFin' => $unAtelier->getDATEFIN(),
+                    'duree' => $unAtelier->getDUREE(),
+                    'email' => $tableauEmail
                 ];
+
             }
+            dump($tableau);
             return new JsonResponse($tableau);
         } else {
             return new JsonResponse(['message' => 'Hackathon not found'], Response::HTTP_NOT_FOUND);
@@ -138,6 +150,10 @@ class ApiController extends AbstractController
             $participantAtelier->setEMAIL($json['email']);
             $participantAtelier->setIDATELIER($leAtelier);
 
+            if ($leAtelier->getNBPLACESRESTANTES() != 0) {
+                $leAtelier->setNBPLACESRESTANTES($leAtelier->getNBPLACESRESTANTES() - 1);
+            }
+
             $d = $doctrine->getManager();
             $d->persist($participantAtelier);
             $d->flush();
@@ -148,7 +164,7 @@ class ApiController extends AbstractController
         }
     }
 
-    #[Route('/api/atelier/{idAtelier}/commentaire', name: 'app_api_add_commentaire_atelier', methods: ['POST'])]
+    #[Route('/api/atelier/{idAtelier}/addCommentaire', name: 'app_api_add_commentaire_atelier', methods: ['POST'])]
     public function addCommentaireAtelier(ManagerRegistry $doctrine, $idAtelier, Request $request): Response
     {
         $json = json_decode($request->getContent(), true);
@@ -168,6 +184,29 @@ class ApiController extends AbstractController
             $d->flush();
 
             return new JsonResponse(['message' => 'Commentaire crée'], Response::HTTP_CREATED);
+        } else {
+            return new JsonResponse(['message' => 'Atelier not found'], Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    #[Route('/api/atelier/{idAtelier}/commentaire', name: 'app_api_get_commentaire_atelier', methods: ['GET'])]
+    public function getCommentairesAtelier(ManagerRegistry $doctrine, $idAtelier): Response
+    {
+        $repositoryAtelier = $doctrine->getRepository(Atelier::class);
+        $leAtelier = $repositoryAtelier->find($idAtelier);
+
+        $repositoryCommentaires = $doctrine->getRepository(CommentaireAtelier::class);
+        $lesCommentairesAtelier = $repositoryCommentaires->findBy(array('IDATELIER' => $idAtelier));
+        if ($leAtelier !== null) {
+            $tableau= [];
+            foreach($lesCommentairesAtelier as $unCommentaire) {
+                $tableau[]=[
+                    'email' => $unCommentaire->getEMAIL(),
+                    'commentaire' => $unCommentaire->getCOMMENTAIRE(),
+                    'atelier' => $unCommentaire->setIDATELIER($leAtelier)
+                ];
+            }
+            return new JsonResponse($tableau, 200, ['Access-Control-Allow-Origin' => '*']);
         } else {
             return new JsonResponse(['message' => 'Atelier not found'], Response::HTTP_NOT_FOUND);
         }
