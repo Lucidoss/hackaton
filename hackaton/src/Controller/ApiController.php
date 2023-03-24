@@ -168,8 +168,7 @@ class ApiController extends AbstractController
     public function addCommentaireAtelier(ManagerRegistry $doctrine, $idAtelier, Request $request): Response
     {
         $json = json_decode($request->getContent(), true);
-        dump($request);
-        dump($json);
+
         $repositoryAtelier = $doctrine->getRepository(Atelier::class);
         $leAtelier = $repositoryAtelier->find($idAtelier);
 

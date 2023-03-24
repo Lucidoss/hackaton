@@ -54,6 +54,9 @@ class Hackathon
     #[ORM\Column]
     private ?int $NBPLACES = null;
 
+    #[ORM\Column]
+    private ?int $NBPLACESRESTANTES = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -211,6 +214,18 @@ class Hackathon
     public function setNBPLACES(int $NBPLACES): self
     {
         $this->NBPLACES = $NBPLACES;
+
+        return $this;
+    }
+
+    public function getNBPLACESRESTANTES(): ?int
+    {
+        return $this->NBPLACESRESTANTES;
+    }
+
+    public function setNBPLACESRESTANTES(int $NBPLACESRESTANTES): self
+    {
+        $this->NBPLACESRESTANTES = $NBPLACESRESTANTES;
 
         return $this;
     }

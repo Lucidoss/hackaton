@@ -3,71 +3,59 @@
 {% block title %}Hackathons
 {% endblock %}
 {% block body %}
-	<link rel="stylesheet" href="{{asset('style.css')}}">
-	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link rel="icon" type="image/x-icon" href="{{asset('images/logo.png')}}">
-	<input type="checkbox" id="active">
-	<label for="active" class="menu-btn">
-		<span></span>
-	</label>
-	<label for="active" class="close"></label>
-	<div class="wrapper">
-		<ul>
-			<li>
-				<a href="/">Accueil</a>
-			</li>
-			<li>
-				<a href="/presentation">Presentation</a>
-			</li>
-			<li>
-				<a href="/hackathon">Hackathons</a>
-			</li>
-			<div class="alignement" style="display: table;">
-				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-					<li style="padding-left:200px">
-						<a href="{{ path('app_logout') }}"><img src="{{ asset('images/deconnexion.png') }}" style="width:50px"></a>
-					</li>
-					<li>
-						<a href="{{ path('app_profile') }}"><img src="{{ asset('images/connexion.png') }}" style="width:50px"></a>
-					</li>
-				{% else %}
-					<li>
-						<a href="{{ path('app_login') }}"><img src="{{ asset('images/connexion.png') }}" style="width:50px"></a>
-					</li>
-				{% endif %}
-			</div>
-		</ul>
-	</div>
+	{{ include('navbar.html.twig') }}
 	<div style="z-index: -1;height: 200px;
-		  position: relative;"></br>
+				  position: relative;"></br>
 </br></br></br><div class="card" style="margin: 0px auto;
-	    width: 100%;
-	    max-width: 448px;
-	    background: white;
-	    border-radius: 4px;
-	    box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;"><ol style="list-style: none" class="ok">
+		    width: 100%;
+		    max-width: 448px;
+		    background: white;
+		    border-radius: 4px;
+		    box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;"><ol style="list-style: none" class="ok">
 <div class="col-12">
 	<div class="hackathon" style="padding: 20px;">
 		<li><img src={{ leHackathon.IMAGE }} alt="Aucune image" style="width: 100%"/>
 		</li>
 	</a>
 </li></br><li>Thème:
-{{ leHackathon.THEME }}</li></br><li>Description:{{ leHackathon.DESCRIPTION }}</li></br><li>Ville:{{ leHackathon.VILLE }}</li></br><li>Rue:{{ leHackathon.RUE }}</li></br><li class="date">Du:{{ leHackathon.DATEDEBUT|date('d/m/Y') }}</li></br><li>Au:{{ leHackathon.DATEFIN|date('d/m/Y') }}</li></br><li>De:{{ leHackathon.HEUREDEBUT|date('H:i:s') }}</li></br><li>A:{{ leHackathon.HEUREFIN|date('H:i:s') }}</li></br><li>Places:{{ leHackathon.NBPLACES }}</li> </br> <a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none"><button style="font-size: 16px;
-	    line-height: 28px;
-	    padding: 8px 16px;
-	    width: 100%;
-	    min-height: 44px;
-	    border: unset;
-	    border-radius: 4px;
-	    outline-color: rgb(84 105 212 / 0.5);
-	    background-color: rgb(255, 255, 255);
-	    box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">S'enregistrer à ce Hackathon</button> </a></div></div></ol></br></div>{% endblock %}
+{{ leHackathon.THEME }}</li></br><li>Description:{{ leHackathon.DESCRIPTION }}</li></br><li>Ville:{{ leHackathon.VILLE }}</li></br><li>Rue:{{ leHackathon.RUE }}</li></br><li class="date">Du:{{ leHackathon.DATEDEBUT|date('d/m/Y') }}</li></br><li>Au:{{ leHackathon.DATEFIN|date('d/m/Y') }}</li></br><li>De:{{ leHackathon.HEUREDEBUT|date('H:i:s') }}</li></br><li>A:{{ leHackathon.HEUREFIN|date('H:i:s') }}</li></br><li>Places restantes: {{ leHackathon.NBPLACESRESTANTES }} / {{ leHackathon.NBPLACES }}</li> </br> 
+
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+	{% if lesInscriptions != null %} {# si je suis inscrit #}
+		{% for uneInscription in lesInscriptions %}
+			{% if uneInscription.HACKATHON.id != leHackathon.ID %} 
+				{% if leHackathon.NBPLACESRESTANTES > 0 %}
+					<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none"><button style="font-size: 16px;
+								line-height: 28px;
+								padding: 8px 16px;
+								width: 100%;
+								min-height: 44px;
+								border: unset;
+								border-radius: 4px;
+								outline-color: rgb(84 105 212 / 0.5);
+								background-color: rgb(255, 255, 255);
+								box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+							S'enregistrer à ce Hackathon
+						</button>
+					</a>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none"><button style="font-size: 16px;
+					line-height: 28px;
+					padding: 8px 16px;
+					width: 100%;
+					min-height: 44px;
+					border: unset;
+					border-radius: 4px;
+					outline-color: rgb(84 105 212 / 0.5);
+					background-color: rgb(255, 255, 255);
+					box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+				S'enregistrer à ce Hackathon
+			</button>
+		</a>
+	{% endif %}
+{% endif %}
+			</div></div></ol></br></div>{% endblock %}
