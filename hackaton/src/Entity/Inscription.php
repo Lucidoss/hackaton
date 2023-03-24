@@ -17,11 +17,11 @@ class Inscription
 
     #[ORM\ManyToOne(targetEntity:Participant::class)]
     #[ORM\JoinColumn(name: 'IDPARTICIPANT', referencedColumnName:'IDPARTICIPANT')]
-    private ?Participant $PARTICIPANT = null;
+    private ?Participant $PARTICIPANTS = null;
 
     #[ORM\ManyToOne(targetEntity:Hackathon::class)]
     #[ORM\JoinColumn(name: 'IDHACKATHON', referencedColumnName:'IDHACKATHON')]
-    private ?Hackathon $HACKATHON = null;
+    private ?Hackathon $HACKATHONS = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $DATEINSCRIPTION = null;
@@ -34,26 +34,26 @@ class Inscription
         return $this->id;
     }
 
-    public function getPARTICIPANT(): ?Participant
+    public function getPARTICIPANTS(): ?Participant
     {
-        return $this->PARTICIPANT;
+        return $this->PARTICIPANTS;
     }
 
-    public function setPARTICIPANT(Participant $PARTICIPANT): self
+    public function setPARTICIPANTS(Participant $PARTICIPANTS): self
     {
-        $this->PARTICIPANT = $PARTICIPANT;
+        $this->PARTICIPANTS = $PARTICIPANTS;
 
         return $this;
     }
 
-    public function getHACKATHON(): ?Hackathon
+    public function getHACKATHONS(): ?Hackathon
     {
-        return $this->HACKATHON;
+        return $this->HACKATHONS;
     }
 
-    public function setHACKATHON(Hackathon $HACKATHON): self
+    public function setHACKATHONS(Hackathon $HACKATHONS): self
     {
-        $this->HACKATHON = $HACKATHON;
+        $this->HACKATHONS = $HACKATHONS;
 
         return $this;
     }

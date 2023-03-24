@@ -20,7 +20,7 @@ class Evenement
 
     #[ORM\ManyToOne(targetEntity:Hackathon::class)]
     #[ORM\JoinColumn(name: 'IDHACKATHON', referencedColumnName:'IDHACKATHON')]
-    private ?Hackathon $HACKATHON = null;
+    private ?Hackathon $HACKATHONS = null;
 
     #[ORM\Column(length: 64)]
     private ?string $NOMEVENEMENT = null;
@@ -39,14 +39,14 @@ class Evenement
         return $this->id;
     }
 
-    public function getHACKATHON(): ?Hackathon
+    public function getHACKATHONS(): ?Hackathon
     {
-        return $this->HACKATHON;
+        return $this->HACKATHONS;
     }
 
-    public function setHACKATHON(Hackathon $HACKATHON): self
+    public function setHACKATHONS(Hackathon $HACKATHONS): self
     {
-        $this->HACKATHON = $HACKATHON;
+        $this->HACKATHONS = $HACKATHONS;
 
         return $this;
     }

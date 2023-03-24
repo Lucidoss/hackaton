@@ -16,11 +16,11 @@ class Favoris
 
     #[ORM\ManyToOne(targetEntity:Participant::class)]
     #[ORM\JoinColumn(name: 'IDPARTICIPANT', referencedColumnName:'IDPARTICIPANT')]
-    private ?Participant $IDPARTICIPANT = null;
+    private ?Participant $PARTICIPANTS = null;
 
     #[ORM\ManyToOne(targetEntity:Hackathon::class)]
     #[ORM\JoinColumn(name: 'IDHACKATHON', referencedColumnName:'IDHACKATHON')]
-    private ?Hackathon $IDHACKATHON = null;
+    private ?Hackathon $HACKATHONS = null;
 
     public function getIDFAVORIS(): ?int
     {
@@ -34,26 +34,26 @@ class Favoris
         return $this;
     }
 
-    public function getPARTICIPANT(): ?Participant
+    public function getPARTICIPANTS(): ?Participant
     {
-        return $this->IDPARTICIPANT;
+        return $this->PARTICIPANTS;
     }
 
-    public function setPARTICIPANT(Participant $IDPARTICIPANT): self
+    public function setPARTICIPANTS(Participant $PARTICIPANTS): self
     {
-        $this->IDPARTICIPANT = $IDPARTICIPANT;
+        $this->PARTICIPANTS = $PARTICIPANTS;
 
         return $this;
     }
 
-    public function getHACKATHON(): ?Hackathon
+    public function getHACKATHONS(): ?Hackathon
     {
-        return $this->IDHACKATHON;
+        return $this->HACKATHONS;
     }
 
-    public function setHACKATHON(Hackathon $IDHACKATHON): self
+    public function setHACKATHONS(Hackathon $HACKATHONS): self
     {
-        $this->IDHACKATHON = $IDHACKATHON;
+        $this->HACKATHONS = $HACKATHONS;
 
         return $this;
     }
