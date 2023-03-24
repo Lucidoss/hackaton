@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Favoris
+{% endblock %}
+{% block body %}
+	{{ include('navbar.html.twig') }}
+	<div style="z-index: -1;position: absolute;width: 100%; padding: 20px;">
+
+		<h1>Voici vos hackathons favoris</h1>
+	</br>
+</br>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th scope="col">Thème</th>
+			<th scope="col">Ville</th>
+			<th scope="col">Lieu</th>
+			<th scope="col">CP</th>
+			<th scope="col">Plus d'informations</th>
+			<th scope="col">Enlever des favoris</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for hackathon in lesHackathons %}
+			<tr>
+				<td>{{ hackathon.THEME }}</td>
+				<td>{{ hackathon.VILLE }}</td>
+				<td>{{ hackathon.LIEU }}</td>
+				<td>{{ hackathon.CP }}</td>
+				<td>
+					<a href="/detailhackathon/{{ hackathon.IDHACKATHON }}" style="decoration:none">
+						<button style="font-size: 16px;
+															line-height: 28px;
+															padding: 8px 16px;
+															width: 100%;
+															margin-top:20px;
+															max-width: 448px;
+															border: unset;
+															border-radius: 4px;
+															outline-color: rgb(84 105 212 / 0.5);
+															background-color: rgb(255, 255, 255);
+															box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">Cliquer ici</button>
+					</a>
+				</td>
+				<td>
+					<a href="/suppressionfavoris/{{ hackathon.IDFAVORIS }}" style="decoration:none">
+						<button style="font-size: 16px;
+															line-height: 28px;
+															padding: 8px 16px;
+															width: 100%;
+															margin-top:20px;
+															max-width: 448px;
+															border: unset;
+															border-radius: 4px;
+															outline-color: rgb(84 105 212 / 0.5);
+															background-color: rgb(255, 255, 255);
+															box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">Cliquer ici</button>
+					</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</script>
+<style>
+	h1 {
+		display: inline;
+	}
+</style>{% endblock %}
