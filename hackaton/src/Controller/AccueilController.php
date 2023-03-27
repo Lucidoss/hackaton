@@ -28,7 +28,7 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/profil', name: 'app_profil')]
-    public function profile(ManagerRegistry $doctrine): Response
+    public function profil(ManagerRegistry $doctrine): Response
     {
         $user = $this->getUser();
 
@@ -44,7 +44,7 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/hackathon', name: 'app_hackathon')]
-    public function hackathon(ManagerRegistry $doctrine/*, $idHackathon*/): Response
+    public function hackathon(ManagerRegistry $doctrine): Response
     {
         $repoHackathon = $doctrine->getRepository(Hackathon::class);
         $hackathons = $repoHackathon->findBy(
@@ -61,7 +61,7 @@ class AccueilController extends AbstractController
 
         if($this->getUser()){
             $userId = $this->getUser()->getId();
-            $mesInscriptions = $repoInscriptions->findBy(array('PARTICIPANT' => $userId));
+            $mesInscriptions = $repoInscriptions->findBy(array('PARTICIPANTS' => $userId));
         }
 
         return $this->render('accueil/hackathon.html.twig', [
@@ -91,14 +91,14 @@ class AccueilController extends AbstractController
           );
 
         return $this->render('accueil/hackathon.html.twig', [
-            'lesHackathons' => $hackathons 
+            'lesHackathons' => $hackathons
         ]);
-        } 
+        }
         else
         {
             $userId = $this->getUser()->getId();
             $repoInscription = $doctrine->getRepository(Inscription::class);
-            $estInscrit = $repoInscription->findBy(array('HACKATHON' => $id, 'PARTICIPANT' => $userId));
+            $estInscrit = $repoInscription->findBy(array('HACKATHONS' => $id, 'PARTICIPANTS' => $userId));
 
             $repository = $doctrine->getRepository(Hackathon::class);
             $leHackathon = $repository->find($id);
@@ -116,7 +116,7 @@ class AccueilController extends AbstractController
             $entityManager=$doctrine->getManager();
             $entityManager->persist($leHackathon);
             $entityManager->flush();
-            
+
             return $this->render('accueil/inscriptionhackathon.html.twig', [
                 'leHackathon' => $leHackathon
             ]);
@@ -136,7 +136,7 @@ class AccueilController extends AbstractController
 
         if($this->getUser()){
             $userId = $this->getUser()->getId();
-            $mesInscriptions = $repoInscriptions->findBy(array('PARTICIPANT' => $userId));
+            $mesInscriptions = $repoInscriptions->findBy(array('PARTICIPANTS' => $userId));
         }
 
         return $this->render('accueil/detailhackathon.html.twig', [
@@ -153,29 +153,29 @@ class AccueilController extends AbstractController
         $userId = $user->getId();
         $repoFavoris = $doctrine->getRepository(Favoris::class);
 
-        $mesFavoris = $repoFavoris->findBy(array('IDPARTICIPANT' => $userId));
-        
+        $mesFavoris = $repoFavoris->findBy(array('PARTICIPANTS' => $userId));
+
         $tableau= [];
             foreach($mesFavoris as $unFavoris) {
                 $tableau[]=[
                     'IDFAVORIS'=>$unFavoris->getIDFAVORIS(),
-                    'IDHACKATHON'=>$unFavoris->getHACKATHON()->getID(),
-                    'DATEDEBUT'=>$unFavoris->getHACKATHON()->getDATEDEBUT(),
-                    'DATEFIN'=>$unFavoris->getHACKATHON()->getDATEFIN(),
-                    'HEUREDEBUT'=>$unFavoris->getHACKATHON()->getHEUREDEBUT(),
-                    'HEUREFIN'=>$unFavoris->getHACKATHON()->getHEUREFIN(),
-                    'LIEU'=>$unFavoris->getHACKATHON()->getLIEU(),
-                    'RUE'=>$unFavoris->getHACKATHON()->getRUE(),
-                    'VILLE'=>$unFavoris->getHACKATHON()->getVILLE(),
-                    'CP'=>$unFavoris->getHACKATHON()->getCP(),
-                    'THEME'=>$unFavoris->getHACKATHON()->getTHEME(),
-                    'DESCRIPTION'=>$unFavoris->getHACKATHON()->getDESCRIPTION(),
-                    'IMAGE'=>$unFavoris->getHACKATHON()->getIMAGE(),
-                    'DATELIMITE'=>$unFavoris->getHACKATHON()->getDATELIMITE(),
-                    'NBPLACES'=>$unFavoris->getHACKATHON()->getNBPLACES(),
+                    'IDHACKATHON'=>$unFavoris->getHACKATHONS()->getID(),
+                    'DATEDEBUT'=>$unFavoris->getHACKATHONS()->getDATEDEBUT(),
+                    'DATEFIN'=>$unFavoris->getHACKATHONS()->getDATEFIN(),
+                    'HEUREDEBUT'=>$unFavoris->getHACKATHONS()->getHEUREDEBUT(),
+                    'HEUREFIN'=>$unFavoris->getHACKATHONS()->getHEUREFIN(),
+                    'LIEU'=>$unFavoris->getHACKATHONS()->getLIEU(),
+                    'RUE'=>$unFavoris->getHACKATHONS()->getRUE(),
+                    'VILLE'=>$unFavoris->getHACKATHONS()->getVILLE(),
+                    'CP'=>$unFavoris->getHACKATHONS()->getCP(),
+                    'THEME'=>$unFavoris->getHACKATHONS()->getTHEME(),
+                    'DESCRIPTION'=>$unFavoris->getHACKATHONS()->getDESCRIPTION(),
+                    'IMAGE'=>$unFavoris->getHACKATHONS()->getIMAGE(),
+                    'DATELIMITE'=>$unFavoris->getHACKATHONS()->getDATELIMITE(),
+                    'NBPLACES'=>$unFavoris->getHACKATHONS()->getNBPLACES(),
                 ];
             }
-        
+
         return $this->render('accueil/favoris.html.twig', [
             'lesHackathons' => $tableau,
         ]);
@@ -190,7 +190,7 @@ class AccueilController extends AbstractController
 
 
             $userId = $this->getUser()->getId();
-            $estFavoris = $repoFavoris->findBy(array('IDHACKATHON' => $id, 'IDPARTICIPANT' => $userId));
+            $estFavoris = $repoFavoris->findBy(array('HACKATHONS' => $id, 'PARTICIPANTS' => $userId));
 
             $repository = $doctrine->getRepository(Hackathon::class);
             $hackathon = $repository->find($id);
@@ -206,9 +206,9 @@ class AccueilController extends AbstractController
             {
                 $favoris = new Favoris();
                 $participant = $this->getUser();
-                $favoris->setPARTICIPANT($participant);
+                $favoris->setPARTICIPANTS($participant);
                 $hackhathon = $doctrine->getRepository(Hackathon::class)->find($id);
-                $favoris->setHACKATHON($hackhathon);
+                $favoris->setHACKATHONS($hackhathon);
                 $entityManager=$doctrine->getManager();
                 $entityManager->persist($favoris);
                 $entityManager->flush();
