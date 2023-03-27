@@ -23,6 +23,10 @@ class RegisterController extends AbstractController
             $prenom = $_POST['prenom'];
             $participant->setPRENOM($prenom);
 
+            $login = $_POST['login'];
+            $leLogin = $login;
+            $participant->setLOGIN($login);
+
             $dateNaissance = $_POST['dateNaissance'];
             $participant->setDATENAISSANCE(new \DateTime($dateNaissance));
 
@@ -44,12 +48,24 @@ class RegisterController extends AbstractController
             $portfolio = $_POST['portfolio'];
             $participant->setPORTFOLIO($portfolio);
             
-            $participant->setLOGIN(strtolower($prenom[0] . $nom));
+            $repoFavoris = $doctrine->getRepository(Participant::class);
+            $loginExiste = $repoFavoris->findby(array('LOGIN' => $login));
 
-            $entityManager=$doctrine->getManager();
-            $entityManager->persist($participant);
-            $entityManager->flush();
+            if(!$loginExiste){
+                $entityManager=$doctrine->getManager();
+                $entityManager->persist($participant);
+                $entityManager->flush();
+
+                return $this->render('accueil/connexion.html.twig');
+            }
+
+            return $this->render('accueil/inscription.html.twig', [
+                'erreur' =>  "le login " . $leLogin . " est déjà pris",
+            ]);
+
         }
-            return $this->render('accueil/inscription.html.twig');
+        return $this->render('accueil/inscription.html.twig', [
+            'erreur' => "",
+        ]);
     }
 }
