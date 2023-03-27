@@ -36,8 +36,7 @@ class AccueilController extends AbstractController
 
         $userId = $user->getId();
         $mesInscriptions = $repoInscription->findBy(array('PARTICIPANTS' => $userId));
-        dump($mesInscriptions);
-        
+
         return $this->render('accueil/profil.html.twig', [
             'leProfil' => $user,
             'lesInscriptions' => $mesInscriptions
