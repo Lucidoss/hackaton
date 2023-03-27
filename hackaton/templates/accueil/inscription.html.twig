@@ -50,6 +50,10 @@
 									<input type="email" name="email" minlength="1" maxlength="32" required>
 								</div>
 								<div class="field padding-bottom--24">
+									<label for="portfolio">Portfolio</label>
+									<input type="portfolio" name="portfolio" required pattern="https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}" title="Doit commencer par HTTP, HTTPS ou WWW">
+								</div>
+								<div class="field padding-bottom--24">
 									<div class="grid--50-50">
 										<label for="password">Mot de passe</label>
 									</div>

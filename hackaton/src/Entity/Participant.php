@@ -47,6 +47,9 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $MDP = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $PORTFOLIO = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,4 +225,16 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     //     return $this;
     // }
+
+    public function getPORTFOLIO(): ?string
+    {
+        return $this->PORTFOLIO;
+    }
+
+    public function setPORTFOLIO(string $PORTFOLIO): self
+    {
+        $this->PORTFOLIO = $PORTFOLIO;
+
+        return $this;
+    }
 }
