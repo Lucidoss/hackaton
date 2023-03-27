@@ -25,7 +25,7 @@ class ParticipantAtelier
 
     #[ORM\ManyToOne(targetEntity:Atelier::class)]
     #[ORM\JoinColumn(name: 'IDATELIER', referencedColumnName:'IDEVENEMENT')]
-    private ?Atelier $IDATELIER = null;
+    private ?Atelier $ATELIERS = null;
 
     public function getId(): ?int
     {
@@ -68,14 +68,14 @@ class ParticipantAtelier
         return $this;
     }
 
-    public function getIDATELIER(): ?Atelier
+    public function getATELIERS(): ?Atelier
     {
-        return $this->IDATELIER;
+        return $this->ATELIERS;
     }
 
-    public function setIDATELIER(Atelier $IDATELIER): self
+    public function setATELIERS(Atelier $ATELIERS): self
     {
-        $this->IDATELIER = $IDATELIER;
+        $this->ATELIERS = $ATELIERS;
 
         return $this;
     }

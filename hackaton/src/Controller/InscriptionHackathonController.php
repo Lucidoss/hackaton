@@ -18,10 +18,10 @@ class InscriptionHackathonController extends AbstractController
             $inscription = new Inscription();
 
             $participant = $this->getUser();
-            $inscription->setPARTICIPANT($participant);
+            $inscription->setPARTICIPANTS($participant);
 
             $hackhathon = $doctrine->getRepository(Hackathon::class)->find($id);
-            $inscription->setHACKATHON($hackhathon);
+            $inscription->setHACKATHONS($hackhathon);
 
             $time = new \DateTime();
             $time = date('d-m-Y');

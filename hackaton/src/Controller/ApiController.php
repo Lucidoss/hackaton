@@ -103,7 +103,7 @@ class ApiController extends AbstractController
         $repositoryHackathon = $doctrine->getRepository(Hackathon::class);
         $leHackathon = $repositoryHackathon->find($idHackathon);
 
-        $lesAteliers = $repositoryAtelier->findBy(array('HACKATHON' => $idHackathon));
+        $lesAteliers = $repositoryAtelier->findBy(array('HACKATHONS' => $idHackathon));
 
         $repositoryParticipantsAtelier = $doctrine->getRepository(ParticipantAtelier::class);
 
@@ -111,7 +111,7 @@ class ApiController extends AbstractController
             $tableau = [];
             $tableauEmail = [];
             foreach($lesAteliers as $unAtelier) {
-                $participantsAtelier = $repositoryParticipantsAtelier->findBy(array('IDATELIER' => $unAtelier->getId()));
+                $participantsAtelier = $repositoryParticipantsAtelier->findBy(array('ATELIERS' => $unAtelier->getId()));
                 foreach ($participantsAtelier as $unParticipantAtelier) {
                     array_push($tableauEmail, $unParticipantAtelier->getEMAIL());
                 }
@@ -148,7 +148,7 @@ class ApiController extends AbstractController
             $participantAtelier->setNOM($json['nom']);
             $participantAtelier->setPRENOM($json['prenom']);
             $participantAtelier->setEMAIL($json['email']);
-            $participantAtelier->setIDATELIER($leAtelier);
+            $participantAtelier->setATELIERS($leAtelier);
 
             if ($leAtelier->getNBPLACESRESTANTES() != 0) {
                 $leAtelier->setNBPLACESRESTANTES($leAtelier->getNBPLACESRESTANTES() - 1);
@@ -177,7 +177,7 @@ class ApiController extends AbstractController
         if ($leAtelier !== null) {
             $commentaireAtelier->setEMAIL($json['email']);
             $commentaireAtelier->setCOMMENTAIRE($json['commentaire']);
-            $commentaireAtelier->setIDATELIER($leAtelier);
+            $commentaireAtelier->setATELIERS($leAtelier);
 
             $d = $doctrine->getManager();
             $d->persist($commentaireAtelier);
@@ -196,14 +196,14 @@ class ApiController extends AbstractController
         $leAtelier = $repositoryAtelier->find($idAtelier);
 
         $repositoryCommentaires = $doctrine->getRepository(CommentaireAtelier::class);
-        $lesCommentairesAtelier = $repositoryCommentaires->findBy(array('IDATELIER' => $idAtelier));
+        $lesCommentairesAtelier = $repositoryCommentaires->findBy(array('ATELIERS' => $idAtelier));
         if ($leAtelier !== null) {
             $tableau= [];
             foreach($lesCommentairesAtelier as $unCommentaire) {
                 $tableau[]=[
                     'email' => $unCommentaire->getEMAIL(),
                     'commentaire' => $unCommentaire->getCOMMENTAIRE(),
-                    'atelier' => $unCommentaire->setIDATELIER($leAtelier)
+                    'atelier' => $unCommentaire->setATELIERS($leAtelier)
                 ];
             }
             return new JsonResponse($tableau, 200, ['Access-Control-Allow-Origin' => '*']);
