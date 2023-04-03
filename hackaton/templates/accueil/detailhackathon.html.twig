@@ -24,7 +24,7 @@
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 	{% if lesInscriptions != null %} {# si je suis inscrit #}
 		{% for uneInscription in lesInscriptions %}
-			{% if uneInscription.HACKATHON.id != leHackathon.ID %} 
+			{% if uneInscription.HACKATHONS.id != leHackathon.ID %} 
 				{% if leHackathon.NBPLACESRESTANTES > 0 %}
 					<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none"><button style="font-size: 16px;
 								line-height: 28px;

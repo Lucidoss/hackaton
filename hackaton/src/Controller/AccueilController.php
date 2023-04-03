@@ -221,6 +221,40 @@ class AccueilController extends AbstractController
     {
         $repoFavoris = $doctrine->getRepository(Favoris::class);
         $leHackathon = $repoFavoris->find($id);
+
+        if(!$leHackathon){
+            $user = $this->getUser();
+        $userId = $user->getId();
+        // $repoFavoris = $doctrine->getRepository(Favoris::class);
+
+        $mesFavoris = $repoFavoris->findBy(array('PARTICIPANTS' => $userId));
+
+        $tableau= [];
+            foreach($mesFavoris as $unFavoris) {
+                $tableau[]=[
+                    'IDFAVORIS'=>$unFavoris->getIDFAVORIS(),
+                    'IDHACKATHON'=>$unFavoris->getHACKATHONS()->getID(),
+                    'DATEDEBUT'=>$unFavoris->getHACKATHONS()->getDATEDEBUT(),
+                    'DATEFIN'=>$unFavoris->getHACKATHONS()->getDATEFIN(),
+                    'HEUREDEBUT'=>$unFavoris->getHACKATHONS()->getHEUREDEBUT(),
+                    'HEUREFIN'=>$unFavoris->getHACKATHONS()->getHEUREFIN(),
+                    'LIEU'=>$unFavoris->getHACKATHONS()->getLIEU(),
+                    'RUE'=>$unFavoris->getHACKATHONS()->getRUE(),
+                    'VILLE'=>$unFavoris->getHACKATHONS()->getVILLE(),
+                    'CP'=>$unFavoris->getHACKATHONS()->getCP(),
+                    'THEME'=>$unFavoris->getHACKATHONS()->getTHEME(),
+                    'DESCRIPTION'=>$unFavoris->getHACKATHONS()->getDESCRIPTION(),
+                    'IMAGE'=>$unFavoris->getHACKATHONS()->getIMAGE(),
+                    'DATELIMITE'=>$unFavoris->getHACKATHONS()->getDATELIMITE(),
+                    'NBPLACES'=>$unFavoris->getHACKATHONS()->getNBPLACES(),
+                ];
+            }
+
+        return $this->render('accueil/favoris.html.twig', [
+            'lesHackathons' => $tableau,
+        ]);
+        }
+
         $entityManager=$doctrine->getManager();
         $entityManager->remove($leHackathon);
         $entityManager->flush();
