@@ -62,8 +62,9 @@ class AccueilController extends AbstractController
         if($this->getUser()){
             $userId = $this->getUser()->getId();
             $mesInscriptions = $repoInscriptions->findBy(array('PARTICIPANTS' => $userId));
+            dump($mesInscriptions);
         }
-
+        dump($hackathons);
         return $this->render('accueil/hackathon.html.twig', [
             'lesHackathons' => $hackathons,
             'lesFavoris' => $favoris,

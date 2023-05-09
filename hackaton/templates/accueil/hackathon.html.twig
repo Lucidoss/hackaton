@@ -61,32 +61,22 @@
 </li>
 </br>
 
+{# Début Si Authentifié #}
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 	{# Bouton Inscription #}
-	{% if lesInscriptions != null %} {# si je suis inscrit #}
-		{% for uneInscription in lesInscriptions %}
-			{% if uneInscription.HACKATHONS.id != hackathon.ID %}
-				{% if hackathon.NBPLACESRESTANTES > 0 %}
-				<a href="/inscriptionhackathon/{{ hackathon.ID }}" style="decoration:none">
-					<button style="font-size: 16px;
-									line-height: 28px;
-									padding: 8px 16px;
-									width: 100%;
-									max-width: 448px;
-									border: unset;
-									border-radius: 4px;
-									outline-color: rgb(84 105 212 / 0.5);
-									background-color: rgb(255, 255, 255);
-									box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
-						S'inscrire à ce hackathon
-					</button>
-					</a>
-				{% endif %}
-			{% endif %}
-		{% endfor %}
-	{% else %}
-		<a href="/inscriptionhackathon/{{ hackathon.ID }}" style="decoration:none">
+	{% set estInscrit = false %}
+
+	{# Check si on est déjà inscrit au hackathon #}
+	{% for uneInscription in lesInscriptions %}
+		{% if hackathon.ID == uneInscription.HACKATHONS.id %}
+			{% set estInscrit = true %}
+		{% endif %}
+	{% endfor %}
+
+	{# Si on est pas inscrit et qu'il y a des places disponibles #}
+	{% if estInscrit == false and hackathon.NBPLACESRESTANTES > 0 %}
+		<a href="{{path('app_inscriptionhackathon', {'id' : hackathon.ID}) }}" style="decoration:none">
 			<button style="font-size: 16px;
 							line-height: 28px;
 							padding: 8px 16px;
@@ -97,54 +87,43 @@
 							outline-color: rgb(84 105 212 / 0.5);
 							background-color: rgb(255, 255, 255);
 							box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
-				S'inscrire à ce hackathon
+					S'inscrire à ce hackathon
 			</button>
 		</a>
 	{% endif %}
-
-
+	{# Fin Bouton Inscription #}
 
 	{# Bouton Favoris #}
-	{% if lesFavoris != null %}
-		{% for unFavoris in lesFavoris %}
-			{% if unFavoris.HACKATHONS.id == hackathon.ID %}
-			{# Supprimer des favoris #}
-				<a href="/suppressionfavoris/{{ unFavoris.IDFAVORIS }}" style="decoration:none">
-					<button style="font-size: 16px;
-									line-height: 28px;
-									padding: 8px 16px;
-									width: 100%;
-									margin-top:20px;
-									max-width: 448px;
-									border: unset;
-									border-radius: 4px;
-									outline-color: rgb(84 105 212 / 0.5);
-									background-color: rgb(255, 255, 255);
-									box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
-						Supprimer ce hackathon des favoris
-					</button>
-				</a>
-			{% else %}
-				{# Ajouter aux favoris #}
-				<a href="/confirmationfavoris/{{ hackathon.ID }}" style="decoration:none">
-					<button style="font-size: 16px;
-								line-height: 28px;
-								padding: 8px 16px;
-								width: 100%;
-								margin-top:20px;
-								max-width: 448px;
-								border: unset;
-								border-radius: 4px;
-								outline-color: rgb(84 105 212 / 0.5);
-								background-color: rgb(255, 255, 255);
-								box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
-						Ajouter ce hackathon en favoris
-					</button>
-				</a>
-			{% endif %}
-		{% endfor %}
+	{% set estFavoris = false %}
+	{% set favorisID = null %}
+
+	{# Check si le hackathon est en favoris #}
+	{% for unFavoris in lesFavoris %}
+		{% if hackathon.ID == unFavoris.HACKATHONS.id %}
+			{% set estFavoris = true %}
+			{% set favorisID = unFavoris.IDFAVORIS %}
+		{% endif %}
+	{% endfor %}
+
+	{# Si le hackathon est en favoris --> Bouton pour supprimer des favoris #}
+	{% if estFavoris == true %}
+		<a href="/suppressionfavoris/{{ favorisID }}" style="decoration:none">
+			<button style="font-size: 16px;
+							line-height: 28px;
+							padding: 8px 16px;
+							width: 100%;
+							margin-top:20px;
+							max-width: 448px;
+							border: unset;
+							border-radius: 4px;
+							outline-color: rgb(84 105 212 / 0.5);
+							background-color: rgb(255, 255, 255);
+							box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+				Supprimer ce hackathon des favoris
+			</button>
+		</a>
+	{# Si le hackathon n'est pas en favoris --> Bouton pour ajouter aux favoris #}
 	{% else %}
-		{# Ajouter aux favoris #}
 		<a href="/confirmationfavoris/{{ hackathon.ID }}" style="decoration:none">
 			<button style="font-size: 16px;
 						line-height: 28px;
@@ -161,9 +140,10 @@
 			</button>
 		</a>
 	{% endif %}
+	{# Fin Bouton Favoris #}
+
 {% endif %}
-
-
+{# Fin Si Authentifié #}
 </div>
 </ol>
 </br>
@@ -211,4 +191,5 @@ h1 {
 }
 </style>
 
-</div>{% endblock %}
+</div>
+{% endblock %}
