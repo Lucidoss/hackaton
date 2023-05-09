@@ -62,9 +62,8 @@ class AccueilController extends AbstractController
         if($this->getUser()){
             $userId = $this->getUser()->getId();
             $mesInscriptions = $repoInscriptions->findBy(array('PARTICIPANTS' => $userId));
-            dump($mesInscriptions);
         }
-        dump($hackathons);
+
         return $this->render('accueil/hackathon.html.twig', [
             'lesHackathons' => $hackathons,
             'lesFavoris' => $favoris,
@@ -84,7 +83,7 @@ class AccueilController extends AbstractController
     #[Route('/inscriptionhackathon/{id}', name: 'app_inscriptionhackathon')]
     public function inscriptionhackathon(ManagerRegistry $doctrine, $id): Response
     {
-        if($this->getUser() == NULL){
+        if($this->getUser() == NULL) {
             $repository = $doctrine->getRepository(Hackathon::class);
             $hackathons = $repository->findBy(
             array(), // ou [] à la place des () sans array devant
@@ -95,8 +94,7 @@ class AccueilController extends AbstractController
             'lesHackathons' => $hackathons
         ]);
         }
-        else
-        {
+        else {
             $userId = $this->getUser()->getId();
             $repoInscription = $doctrine->getRepository(Inscription::class);
             $estInscrit = $repoInscription->findBy(array('HACKATHONS' => $id, 'PARTICIPANTS' => $userId));
@@ -104,19 +102,11 @@ class AccueilController extends AbstractController
             $repository = $doctrine->getRepository(Hackathon::class);
             $leHackathon = $repository->find($id);
 
-            if($estInscrit)
-            {
+            if($estInscrit) {
                 return $this->render('accueil/echecInscriptionHackathon.html.twig', [
                     'leHackathon' => $leHackathon,
                 ]);
             }
-
-            $placesRestantes = $leHackathon->getNBPLACES()-1;
-            $leHackathon->setNBPLACESRESTANTES($placesRestantes);
-
-            $entityManager=$doctrine->getManager();
-            $entityManager->persist($leHackathon);
-            $entityManager->flush();
 
             return $this->render('accueil/inscriptionhackathon.html.twig', [
                 'leHackathon' => $leHackathon

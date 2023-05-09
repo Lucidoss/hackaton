@@ -18,37 +18,39 @@
 				<div class="formbg-outer">
 					<div class="formbg">
 						<div class="formbg-inner padding-horizontal--48">
-							<span class="padding-bottom--15">S'enregistrer à un hackathon
-							</span>
+							<span class="padding-bottom--15">S'inscrire à un hackathon</span>
+
 							<form id="stripe-login" action="{{ path('app_inscription_hackathon', {id: leHackathon.id }) }}" method="POST">
 								<div class="field padding-bottom--24">
 									<label for="hackathon">Hackaton Choisi</label>
 									<input type="hackathon" name="hackathon" id="disabledTextInput" value="{{ leHackathon.THEME }}" disabled style="display: block;
-																												    width: 100%;
-																												    padding: 0.375rem 0.75rem;
-																												    font-size: 1rem;
-																												    line-height: 1.5;
-																												    color: #495057;
-																												    background-color: #e9ecef;
-																												    background-clip: padding-box;
-																												    border: 1px solid #ced4da;
-																												    border-radius: 0.25rem;
-																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-																													background-color">
+										width: 100%;
+										padding: 0.375rem 0.75rem;
+										font-size: 1rem;
+										line-height: 1.5;
+										color: #495057;
+										background-color: #e9ecef;
+										background-clip: padding-box;
+										border: 1px solid #ced4da;
+										border-radius: 0.25rem;
+										transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+										background-color"
+									>
 								</div>
 								<div class="field padding-bottom--24">
 									<label for="competences">Vos compétences</label>
 									<input type="competences" name="competences" style="display: block;
-																												    width: 100%;
-																												    padding: 0.375rem 0.75rem;
-																												    font-size: 1rem;
-																												    line-height: 1.5;
-																												    color: #495057;
-																												    background-clip: padding-box;
-																												    border: 1px solid #ced4da;
-																												    border-radius: 0.25rem;
-																												    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-																													background-color">
+										width: 100%;
+										padding: 0.375rem 0.75rem;
+										font-size: 1rem;
+										line-height: 1.5;
+										color: #495057;
+										background-clip: padding-box;
+										border: 1px solid #ced4da;
+										border-radius: 0.25rem;
+										transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+										background-color"
+									>
 								</div>
 								<div class="field padding-bottom--24">
 									<input type="submit" name="submit" value="S'inscrire">

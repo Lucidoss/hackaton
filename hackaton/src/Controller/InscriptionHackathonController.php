@@ -20,8 +20,8 @@ class InscriptionHackathonController extends AbstractController
             $participant = $this->getUser();
             $inscription->setPARTICIPANTS($participant);
 
-            $hackhathon = $doctrine->getRepository(Hackathon::class)->find($id);
-            $inscription->setHACKATHONS($hackhathon);
+            $hackathon = $doctrine->getRepository(Hackathon::class)->find($id);
+            $inscription->setHACKATHONS($hackathon);
 
             $time = new \DateTime();
             $time = date('d-m-Y');
@@ -31,8 +31,12 @@ class InscriptionHackathonController extends AbstractController
             $competences = $_POST['competences'];
             $inscription->setDESCRIPTION($competences);
 
+            $placesRestantesApres = $hackathon->getNBPLACESRESTANTES() - 1;
+            $hackathon->setNBPLACESRESTANTES($placesRestantesApres);
+
             $entityManager=$doctrine->getManager();
             $entityManager->persist($inscription);
+            $entityManager->persist($hackathon);
             $entityManager->flush();
 
             return $this->render('inscription_hackathon/inscriptionHackathonConfirmation.html.twig');

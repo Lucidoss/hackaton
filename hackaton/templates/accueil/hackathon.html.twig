@@ -8,32 +8,33 @@
 
 	<h1>Il existe</h1>
 	<h1 id="totalHackathon">{{lesHackathons|length()}}</h1>
-	<h1 id="titreHackathon">
-		hackathons.</h1>
+	<h1 id="titreHackathon">hackathons.</h1>
 
 	<input id="searchbar" class="searchbar" onkeyup="search_hackathons();update_nbhackathon();" type="text" name="search" placeholder="Rechercher un hackathons" style="font-size: 16px;
-								    line-height: 28px;
-								    padding: 8px 16px;
-								    width: 100%;
-								    min-height: 44px;
-									margin-top:20px;
-								    border: unset;
-								    border-radius: 4px;
-								    outline-color: rgb(84 105 212 / 0.5);
-								    background-color: rgb(255, 255, 255);
-								    box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+		line-height: 28px;
+		padding: 8px 16px;
+		width: 100%;
+		min-height: 44px;
+		margin-top:20px;
+		border: unset;
+		border-radius: 4px;
+		outline-color: rgb(84 105 212 / 0.5);
+		background-color: rgb(255, 255, 255);
+		box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;"
+	>
 </br></br><div class="row">
 
 
 {% for hackathon in lesHackathons %}
 	<div class="container" style="list-style: none; width:100%;padding:20px;">
 		<div class="card" style="margin: 0px auto;
-																																    width: 100%;
-																																    max-width: 448px;
-																																    background: white;
-																																    border-radius: 4px;
-																																	box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;
-																																	">
+			width: 100%;
+			max-width: 448px;
+			background: white;
+			border-radius: 4px;
+			box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;
+			"
+		>
 			<ol style="list-style: none" class="ok">
 				<div class="hackathon" style="padding: 20px;">
 					<li>
@@ -78,16 +79,16 @@
 	{% if estInscrit == false and hackathon.NBPLACESRESTANTES > 0 %}
 		<a href="{{path('app_inscriptionhackathon', {'id' : hackathon.ID}) }}" style="decoration:none">
 			<button style="font-size: 16px;
-							line-height: 28px;
-							padding: 8px 16px;
-							width: 100%;
-							max-width: 448px;
-							border: unset;
-							border-radius: 4px;
-							outline-color: rgb(84 105 212 / 0.5);
-							background-color: rgb(255, 255, 255);
-							box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
-					S'inscrire à ce hackathon
+				line-height: 28px;
+				padding: 8px 16px;
+				width: 100%;
+				max-width: 448px;
+				border: unset;
+				border-radius: 4px;
+				outline-color: rgb(84 105 212 / 0.5);
+				background-color: rgb(255, 255, 255);
+				box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+				S'inscrire à ce hackathon
 			</button>
 		</a>
 	{% endif %}
@@ -109,16 +110,16 @@
 	{% if estFavoris == true %}
 		<a href="/suppressionfavoris/{{ favorisID }}" style="decoration:none">
 			<button style="font-size: 16px;
-							line-height: 28px;
-							padding: 8px 16px;
-							width: 100%;
-							margin-top:20px;
-							max-width: 448px;
-							border: unset;
-							border-radius: 4px;
-							outline-color: rgb(84 105 212 / 0.5);
-							background-color: rgb(255, 255, 255);
-							box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+				line-height: 28px;
+				padding: 8px 16px;
+				width: 100%;
+				margin-top:20px;
+				max-width: 448px;
+				border: unset;
+				border-radius: 4px;
+				outline-color: rgb(84 105 212 / 0.5);
+				background-color: rgb(255, 255, 255);
+				box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
 				Supprimer ce hackathon des favoris
 			</button>
 		</a>
@@ -126,16 +127,16 @@
 	{% else %}
 		<a href="/confirmationfavoris/{{ hackathon.ID }}" style="decoration:none">
 			<button style="font-size: 16px;
-						line-height: 28px;
-						padding: 8px 16px;
-						width: 100%;
-						margin-top:20px;
-						max-width: 448px;
-						border: unset;
-						border-radius: 4px;
-						outline-color: rgb(84 105 212 / 0.5);
-						background-color: rgb(255, 255, 255);
-						box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+				line-height: 28px;
+				padding: 8px 16px;
+				width: 100%;
+				margin-top:20px;
+				max-width: 448px;
+				border: unset;
+				border-radius: 4px;
+				outline-color: rgb(84 105 212 / 0.5);
+				background-color: rgb(255, 255, 255);
+				box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
 				Ajouter ce hackathon en favoris
 			</button>
 		</a>

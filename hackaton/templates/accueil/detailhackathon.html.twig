@@ -6,12 +6,14 @@
 	{{ include('navbar.html.twig') }}
 	<div style="z-index: -1;height: 200px;
 				  position: relative;"></br>
-</br></br></br><div class="card" style="margin: 0px auto;
-		    width: 100%;
-		    max-width: 448px;
-		    background: white;
-		    border-radius: 4px;
-		    box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;"><ol style="list-style: none" class="ok">
+</br></br></br>
+<div class="card" style="margin: 0px auto;
+	width: 100%;
+	max-width: 448px;
+	background: white;
+	border-radius: 4px;
+	box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;"><ol style="list-style: none" class="ok"
+>
 <div class="col-12">
 	<div class="hackathon" style="padding: 20px;">
 		<li><img src={{ leHackathon.IMAGE }} alt="Aucune image" style="width: 100%"/>
@@ -35,16 +37,17 @@
 
 	{# Si on est pas inscrit et qu'il y a des places disponibles #}
 	{% if estInscrit == false and leHackathon.NBPLACESRESTANTES > 0 %}
-		<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none"><button style="font-size: 16px;
-					line-height: 28px;
-					padding: 8px 16px;
-					width: 100%;
-					min-height: 44px;
-					border: unset;
-					border-radius: 4px;
-					outline-color: rgb(84 105 212 / 0.5);
-					background-color: rgb(255, 255, 255);
-					box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+		<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none">
+			<button style="font-size: 16px;
+				line-height: 28px;
+				padding: 8px 16px;
+				width: 100%;
+				min-height: 44px;
+				border: unset;
+				border-radius: 4px;
+				outline-color: rgb(84 105 212 / 0.5);
+				background-color: rgb(255, 255, 255);
+				box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
 				S'inscrire à ce Hackathon
 			</button>
 		</a>
