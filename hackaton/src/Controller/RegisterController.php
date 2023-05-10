@@ -11,10 +11,10 @@ use App\Entity\Participant;
 
 class RegisterController extends AbstractController
 {
-    #[Route('/inscription/{uc}', name: 'app_inscription')]
-    public function inscription(ManagerRegistry $doctrine, $uc): Response
+    #[Route('/inscriptionUtilisateur', name: 'app_inscriptionUtilisateur')]
+    public function inscription(ManagerRegistry $doctrine): Response
     {
-        if($uc == "POST") {
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $participant = new Participant();
 
             $nom = $_POST['nom'];
@@ -47,11 +47,12 @@ class RegisterController extends AbstractController
 
             $portfolio = $_POST['portfolio'];
             $participant->setPORTFOLIO($portfolio);
-            
+
             $repoFavoris = $doctrine->getRepository(Participant::class);
             $loginExiste = $repoFavoris->findby(array('LOGIN' => $login));
 
-            if(!$loginExiste){
+            // Si le login est disponible
+            if(!$loginExiste) {
                 $entityManager=$doctrine->getManager();
                 $entityManager->persist($participant);
                 $entityManager->flush();

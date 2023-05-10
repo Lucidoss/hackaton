@@ -4,37 +4,45 @@
 {% endblock %}
 {% block body %}
 	{{ include('navbar.html.twig') }}
+
 	<div class="content">
 		<div class="title">
 			Bienvenue sur Hackat'Agence
 		</div>
-	</br>
-	{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-		<center>
-			<a href="/inscription/inscrire" style="text-decoration: none">
-				<div class="btn from-center">
-					<p>
-						Créer son compte
+		</br>
+
+		{# Début Si Pas Authentifié #}
+		{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+			<center>
+				<a href="{{ path('app_inscriptionUtilisateur') }}" style="text-decoration: none">
+					<div class="btn from-center">
+						<p>
+							Créer son compte
+						</p>
+					</div>
+				</a>
+			</center>
+			</br>
+
+			<a href="{{ path('app_login') }}">
+				<button class="button-81" role="button">
+					<p style="font-size : 20px">
+						Déjà membre ? Connectez vous ici !
 					</p>
-				</div>
+				</button>
 			</a>
-		</center>
-	</br>
-	<a href="{{ path('app_login') }}">
-		<button class="button-81" role="button">
-			<p style="font-size : 20px">
-				Déjà membre ? Connectez vous ici !
-			</p>
-		</button>
-	</a>
-{% else %}
-	<center>
-		<a href="{{ path('app_hackathon') }}" style="text-decoration: none">
-			<div class="btn from-center">
-				<p>
-					Hackathons
-				</p>
-			</div>
-		</a>
-	</center>
-{% endif %}</div>{% endblock %}
+		{# Sinon Si Authentifié #}
+		{% else %}
+			<center>
+				<a href="{{ path('app_hackathon') }}" style="text-decoration: none">
+					<div class="btn from-center">
+						<p>
+							Hackathons
+						</p>
+					</div>
+				</a>
+			</center>
+		{% endif %}
+		{# Fin Si Pas Authentifié #}
+	</div>
+{% endblock %}

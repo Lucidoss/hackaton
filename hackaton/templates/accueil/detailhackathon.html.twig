@@ -4,61 +4,88 @@
 {% endblock %}
 {% block body %}
 	{{ include('navbar.html.twig') }}
-	<div style="z-index: -1;height: 200px;
-				  position: relative;"></br>
-</br></br></br>
-<div class="card" style="margin: 0px auto;
-	width: 100%;
-	max-width: 448px;
-	background: white;
-	border-radius: 4px;
-	box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;"><ol style="list-style: none" class="ok"
->
-<div class="col-12">
-	<div class="hackathon" style="padding: 20px;">
-		<li><img src={{ leHackathon.IMAGE }} alt="Aucune image" style="width: 100%"/>
-		</li>
-	</a>
-</li></br><li>Thème:
-{{ leHackathon.THEME }}</li></br><li>Description:{{ leHackathon.DESCRIPTION }}</li></br><li>Ville:{{ leHackathon.VILLE }}</li></br><li>Rue:{{ leHackathon.RUE }}</li></br><li class="date">Du:{{ leHackathon.DATEDEBUT|date('d/m/Y') }}</li></br><li>Au:{{ leHackathon.DATEFIN|date('d/m/Y') }}</li></br><li>De:{{ leHackathon.HEUREDEBUT|date('H:i:s') }}</li></br><li>A:{{ leHackathon.HEUREFIN|date('H:i:s') }}</li></br><li>Places restantes: {{ leHackathon.NBPLACESRESTANTES }} / {{ leHackathon.NBPLACES }}</li> </br>
 
-{# Début Si Authentifié #}
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+	<div style="z-index: -1;height: 200px; position: relative;">
+		</br></br></br></br>
 
-	{# Bouton Inscription #}
-	{% set estInscrit = false %}
+		<div class="card" style="margin: 0px auto;
+			width: 100%;
+			max-width: 448px;
+			background: white;
+			border-radius: 4px;
+			box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;"
+		>
+			<ol style="list-style: none" class="ok">
+				<div class="col-12">
+					<div class="hackathon" style="padding: 20px;">
+						<li>
+							<img src={{ leHackathon.IMAGE }} alt="Aucune image" style="width: 100%"/>
+						</li></br>
+						<li>Thème:
+							{{ leHackathon.THEME }}
+						</li></br>
+						<li>
+							Description:{{ leHackathon.DESCRIPTION }}
+						</li></br>
+						<li>
+							Ville:{{ leHackathon.VILLE }}
+						</li></br>
+						<li>
+							Rue:{{ leHackathon.RUE }}
+						</li></br>
+						<li class="date">
+							Du:{{ leHackathon.DATEDEBUT|date('d/m/Y') }}
+						</li></br>
+						<li>
+							Au:{{ leHackathon.DATEFIN|date('d/m/Y') }}
+						</li></br>
+						<li>
+							De:{{ leHackathon.HEUREDEBUT|date('H:i:s') }}
+						</li></br>
+						<li>
+							A:{{ leHackathon.HEUREFIN|date('H:i:s') }}
+						</li></br>
+						<li>
+							Places restantes: {{ leHackathon.NBPLACESRESTANTES }} / {{ leHackathon.NBPLACES }}
+						</li></br>
 
-	{# Check si on est déjà inscrit au hackathon #}
-	{% for uneInscription in lesInscriptions %}
-		{% if leHackathon.ID == uneInscription.HACKATHONS.id %}
-			{% set estInscrit = true %}
-		{% endif %}
-	{% endfor %}
+						{# Début Si Authentifié #}
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-	{# Si on est pas inscrit et qu'il y a des places disponibles #}
-	{% if estInscrit == false and leHackathon.NBPLACESRESTANTES > 0 %}
-		<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none">
-			<button style="font-size: 16px;
-				line-height: 28px;
-				padding: 8px 16px;
-				width: 100%;
-				min-height: 44px;
-				border: unset;
-				border-radius: 4px;
-				outline-color: rgb(84 105 212 / 0.5);
-				background-color: rgb(255, 255, 255);
-				box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
-				S'inscrire à ce Hackathon
-			</button>
-		</a>
-	{% endif %}
-	{# Fin Bouton Inscription #}
+							{# Bouton Inscription #}
+							{% set estInscrit = false %}
 
-{% endif %}
-{# Fin Si Authentifié #}
-</div>
-</div>
-</ol>
-</br>
-</div>
+							{# Check si on est déjà inscrit au hackathon #}
+							{% for uneInscription in lesInscriptions %}
+								{% if leHackathon.ID == uneInscription.HACKATHONS.id %}
+									{% set estInscrit = true %}
+								{% endif %}
+							{% endfor %}
+
+							{# Si on est pas inscrit et qu'il y a des places disponibles #}
+							{% if estInscrit == false and leHackathon.NBPLACESRESTANTES > 0 %}
+								<a href="{{path('app_inscriptionhackathon', {'id' : leHackathon.ID}) }}" style="decoration:none">
+									<button style="font-size: 16px;
+										line-height: 28px;
+										padding: 8px 16px;
+										width: 100%;
+										min-height: 44px;
+										border: unset;
+										border-radius: 4px;
+										outline-color: rgb(84 105 212 / 0.5);
+										background-color: rgb(255, 255, 255);
+										box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;">
+										S'inscrire à ce Hackathon
+									</button>
+								</a>
+							{% endif %}
+							{# Fin Bouton Inscription #}
+
+						{% endif %}
+						{# Fin Si Authentifié #}
+					</div>
+				</div>
+			</ol></br>
+		</div>
+	</div>
 {% endblock %}

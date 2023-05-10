@@ -9,110 +9,133 @@
 	<body>
 		<div class="login-root">
 			{{ include('template.html.twig') }}
+
 			<div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
 				<div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
 					<h1>
-						<a href="/" rel="dofollow">Inscription</a>
+						<a href="{{ path('app_accueil') }}" rel="dofollow">Inscription</a>
 					</h1>
 				</div>
 				<div class="formbg-outer">
 					<div class="formbg">
 						<div class="formbg-inner padding-horizontal--48">
-						{% if erreur != null %}
-							<div class="alert">
-								<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-								{{erreur}}
-							</div>
+							{% if erreur != null %}
+								<div class="alert">
+									<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+									{{erreur}}
+								</div>
 							{% endif %}
-							<span class="padding-bottom--15">Creer un compte
-							</span>
-							<form id="stripe-login" action="{{ path('app_inscription', {uc: 'POST' }) }}" method="POST">
+							<span class="padding-bottom--15">Creer un compte</span>
+
+							<form id="stripe-login" action="{{ path('app_inscriptionUtilisateur') }}" method="POST">
 								<div class="field padding-bottom--24">
 									<label for="nom">Nom</label>
 									<input type="text" name="nom" id="nom" minlength="1" maxlength="32" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<label for="prenom">Prenom</label>
 									<input type="text" name="prenom" minlength="1" maxlength="32" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<label for="login">Login</label>
 									<input type="text" name="login" id="login" minlength="1" maxlength="32" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<label for="naissance">Date de Naissance</label>
 									<input type="date" name="dateNaissance" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<label for="ville">Ville</label>
 									<input type="text" name="ville" minlength="1" maxlength="64" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<label for="rue">Rue</label>
 									<input type="text" name="rue" minlength="1" maxlength="128" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<label for="cp">Code Postal</label>
 									<input type="text" name="cp" minlength="5" maxlength="5" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<label for="email">Email</label>
 									<input type="email" name="email" minlength="1" maxlength="32" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<label for="portfolio">Portfolio</label>
 									<input type="portfolio" name="portfolio" required pattern="https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}" title="Doit commencer par HTTP, HTTPS ou WWW">
 								</div>
+
 								<div class="field padding-bottom--24">
 									<div class="grid--50-50">
 										<label for="password">Mot de passe</label>
 									</div>
+
 									<input type="password" name="mdp" id="myInput" minlength="12" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 12 caractères">
 								</div>
+
 								<div class="padding-bottom--24">
 									<input type="checkbox" onclick="myFunction()">
 									Afficher le mot de passe
 								</div>
+
 								<div class="field padding-bottom--24">
 									<input type="submit" name="submit" value="S'inscrire">
 								</div>
 							</form>
 						</div>
 					</div>
+
 					<div class="footer-link padding-top--24" style="margin-bottom:40px">
 						<span>Déjà membre ?
-							<a href="/connexion">Se connecter</a>
+							<a href="{{ path('app_login') }}">Se connecter</a>
 						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
-</html></body></html></div></body></html><script>function myFunction() {
-var x = document.getElementById("myInput");
-if (x.type === "password") {
-x.type = "text";
-} else {
-x.type = "password";
-}
-}</script><style>.alert {
-	padding: 20px;
-	background-color: #f44336; /* Red */
-	color: white;
-	margin-bottom: 15px;
-}
+</html>
 
-/* The close button */
-.closebtn {
-	margin-left: 15px;
-	color: white;
-	font-weight: bold;
-	float: right;
-	font-size: 22px;
-	line-height: 20px;
-	cursor: pointer;
-}
+<script>
+	function myFunction() {
+		var x = document.getElementById("myInput")
 
-.closebtn:hover {
-	color: black;
-}</style>
+		if (x.type === "password") {
+			x.type = "text"
+		} else {
+			x.type = "password"
+		}
+	}
+</script>
+
+<style>
+	.alert {
+		padding: 20px;
+		background-color: #f44336; /* Red */
+		color: white;
+		margin-bottom: 15px;
+	}
+
+	/* The close button */
+	.closebtn {
+		margin-left: 15px;
+		color: white;
+		font-weight: bold;
+		float: right;
+		font-size: 22px;
+		line-height: 20px;
+		cursor: pointer;
+	}
+
+	.closebtn:hover {
+		color: black;
+	}
+</style>

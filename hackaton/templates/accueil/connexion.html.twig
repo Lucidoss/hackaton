@@ -9,41 +9,46 @@
 	<body>
 		<div class="login-root">
 			{{ include('template.html.twig') }}
+
 			<div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
 				<div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
 					<h1>
-						<a href="/" rel="dofollow">Hackathons</a>
+						<a href="{{ path('app_accueil') }}" rel="dofollow">Hackathons</a>
 					</h1>
 				</div>
+
 				<div class="formbg-outer">
 					<div class="formbg">
 						<div class="formbg-inner padding-horizontal--48">
-							<span class="padding-bottom--15">Connectez-vous à votre compte
-							</span>
+							<span class="padding-bottom--15">Connectez-vous à votre compte</span>
+
 							<form id="stripe-login" action="{{ path('app_login') }}" method="POST">
 								<div class="field padding-bottom--24">
 									<label for="login">Login</label>
 									<input type="text" name="_username" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<div class="grid--50-50">
 										<label for="password">Mot de passe</label>
 									</div>
 									<input type="password" name="_password" required>
 								</div>
+
 								<div class="field padding-bottom--24">
 									<input type="submit" name="submit" value="Se connecter">
 								</div>
 							</form>
 						</div>
 					</div>
+
 					<div class="footer-link padding-top--24">
 						<span>Pas encore membre ?
-							<a href="/inscription/inscrire">Créer son compte</a>
+							<a href="{{ path('app_inscriptionUtilisateur') }}">Créer son compte</a>
 						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
-</html></div></body></html>
+</html>

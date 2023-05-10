@@ -9,20 +9,21 @@
 	<body>
 		<div class="login-root">
 			{{ include('template.html.twig') }}
+
 			<div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
 				<div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
 					<h1>
-						<a href="/" rel="dofollow">Hackathons</a>
+						<a href="{{ path('app_accueil') }}" rel="dofollow">Hackathons</a>
 					</h1>
 				</div>
+
 				<div class="formbg-outer" style="text-align:center">
 					<div class="formbg">
 						<div class="formbg-inner padding-horizontal--48">
-							<span class="padding-bottom--15">Deconnecter avec succès !
+							<span class="padding-bottom--15">Deconnecter avec succès !</span>
 
-							</span>
 							<div class="field padding-bottom--24">
-								<a href="/"><input type="submit" name="submit" value="Retourner à l'accueil"></a>
+								<a href="{{ path('app_accueil') }}"><input type="submit" name="submit" value="Retourner à l'accueil"></a>
 							</div>
 						</div>
 					</div>
@@ -31,4 +32,4 @@
 			</div>
 		</div>
 	</body>
-</html></body></html></div></body></html>
+</html>
